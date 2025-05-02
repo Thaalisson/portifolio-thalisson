@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    @apply bg-white text-black font-sans;
+  }
+
+  .dark {
+    @apply bg-zinc-900 text-white font-sans;
+  }
+
+  .hacker {
+    @apply bg-black text-green-400 font-mono;
+  }
+}
