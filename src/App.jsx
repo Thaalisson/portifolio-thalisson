@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import WelcomeBoot from "./components/WelcomeBoot";
 import HeroMain from "./components/HeroMain";
 import CardSection from "./components/CardSection";
-import ExperienceSection from "./components/experienceSection";
+import ExperienceSection from "./components/ExperienceSection";
 import ThemeToggle from "./components/ThemeToggle";
 
 export default function App() {
