@@ -94,9 +94,7 @@
     --input: 0 0% 90%;
   }
 
-  * {
-    @apply border-border;
-  }
+
 
   body {
     @apply bg-background text-foreground antialiased;
