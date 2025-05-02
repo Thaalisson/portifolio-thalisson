@@ -1,0 +1,18 @@
+# netlify.toml
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  environment = { NODE_VERSION = "18" }  # ou a versão do seu Node
+
+[dev]
+  command = "vite"
+  targetPort = 5173
+  port = 8888
+  framework = "#custom"
+  autoLaunch = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
