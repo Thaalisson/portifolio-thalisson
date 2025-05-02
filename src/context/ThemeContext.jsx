@@ -13,9 +13,13 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const html = document.documentElement;
-    html.classList.remove("dark", "light", "hacker");
-    html.classList.add(theme);
+    html.classList.remove("light-mode", "dark", "hacker");
+  
+    if (theme === "light") html.classList.add("light-mode");
+    else if (theme === "dark") html.classList.add("dark");
+    else html.classList.add("hacker"); // modo hacker customizado
   }, [theme]);
+  
 
   return (
     <ThemeContext.Provider value={{ theme, cycleTheme }}>

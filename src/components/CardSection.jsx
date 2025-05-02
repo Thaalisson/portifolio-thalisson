@@ -37,10 +37,10 @@ const apps = [
 
 export default function CardSection() {
   return (
-    <section className="py-20 px-4 bg-transparent text-inherit">
-      <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
+    <section className="py-24 px-6 bg-background text-foreground transition-colors duration-500">
+      <div className="max-w-6xl mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
         {apps.map((app, index) => (
-          <AppCard key={index} {...app} delay={index * 0.2} />
+          <AppCard key={app.title} {...app} delay={index * 0.2} />
         ))}
       </div>
     </section>

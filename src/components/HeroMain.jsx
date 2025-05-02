@@ -7,8 +7,8 @@ const fullText = "I'm Thalisson Pereira";
 const roles = [
   "Software Developer",
   "Fullstack Engineer",
-  "Multi-Tenant Architect",
-  ".NET & React Specialist",
+  "Web Design",
+  ".NET & React",
 ];
 
 export default function HeroMain() {
@@ -17,7 +17,6 @@ export default function HeroMain() {
   const [subtext, setSubtext] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Typing effect for fullText
   useEffect(() => {
     if (charIndex < fullText.length) {
       const timeout = setTimeout(() => {
@@ -27,7 +26,6 @@ export default function HeroMain() {
     }
   }, [charIndex]);
 
-  // Looping typewriter effect for roles
   useEffect(() => {
     const current = roles[roleIndex];
     let timeout;
@@ -35,17 +33,17 @@ export default function HeroMain() {
     if (!isDeleting && subtext !== current) {
       timeout = setTimeout(() => {
         setSubtext(current.slice(0, subtext.length + 1));
-      }, 150);
+      }, 90);
     } else if (isDeleting && subtext !== "") {
       timeout = setTimeout(() => {
         setSubtext(current.slice(0, subtext.length - 1));
-      }, 100);
+      }, 60);
     } else {
       timeout = setTimeout(() => {
         setIsDeleting((prev) => !prev);
         if (!isDeleting) return;
         setRoleIndex((prev) => (prev + 1) % roles.length);
-      }, 2000);
+      }, 1000);
     }
 
     return () => clearTimeout(timeout);
@@ -63,29 +61,27 @@ export default function HeroMain() {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="min-h-screen px-6 py-20 relative flex items-center justify-start
-        bg-[color:var(--color-bg-light)] text-[color:var(--color-text-light)]
-        dark:bg-[color:var(--color-bg-dark)] dark:text-[color:var(--color-text-dark)]
-        hacker:bg-[color:var(--color-bg-hacker)] hacker:text-[color:var(--color-text-hacker)]
+      className="
+        min-h-screen px-6 py-20 relative flex items-center justify-start
+        bg-background text-foreground
         transition-colors duration-500
-        font-sans dark:font-sans hacker:font-[var(--font-hacker)]"
+        font-sans hacker:font-[var(--font-hacker)]
+      "
     >
-  
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-0" />
 
-      <div className="relative z-10 p-8 rounded-xl max-w-xl bg-black/40 text-white shadow-2xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-md">
+      <div className="relative z-10 p-8 rounded-xl max-w-xl bg-card/80 text-card-foreground shadow-2xl">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
           <span className="pr-2">
             {fullText.slice(0, charIndex)}
-            {charIndex < fullText.length && (
-              <span className="border-r-2 animate-pulse" />
-            )}
+            {charIndex < fullText.length && <span className="border-r-2 animate-pulse ml-1" />}
           </span>
         </h1>
 
-        <p className="text-xl font-medium drop-shadow-sm">
+        <p className="text-xl font-medium opacity-90">
           {subtext}
-          <span className="border-r-2 animate-pulse ml-1" />
+          {subtext && <span className="border-r-2 animate-pulse ml-1" />}
         </p>
       </div>
 

@@ -6,27 +6,26 @@ export default function ThemeToggle() {
   const { theme, cycleTheme } = useTheme();
 
   const icon =
-    theme === "light" ? <FiSun size={20} /> :
-    theme === "dark" ? <FiMoon size={20} /> :
-    <TbBrandMatrix size={20} />;
+    theme === "light" ? <FiSun size={18} /> :
+    theme === "dark" ? <FiMoon size={18} /> :
+    <TbBrandMatrix size={18} />;
 
   const label =
-    theme === "light" ? "Light Mode" :
-    theme === "dark" ? "Dark Mode" :
-    "Hacker Mode";
+    theme === "light" ? "Light" :
+    theme === "dark" ? "Dark" :
+    "Hacker";
 
   return (
     <button
       onClick={cycleTheme}
       className="
-        fixed top-4 right-4 flex items-center gap-2
-        px-4 py-2 rounded shadow-md
-        bg-zinc-800 text-white hover:bg-zinc-700
-        transition-colors duration-300 z-50
+        flex items-center gap-2 px-3 py-1.5 rounded-md
+        bg-zinc-800 text-white text-xs
+        hover:bg-zinc-700 transition-colors duration-300
       "
     >
       {icon}
-      <span className="text-sm">{label}</span>
+      <span className="hidden sm:inline">{label}</span>
     </button>
   );
 }

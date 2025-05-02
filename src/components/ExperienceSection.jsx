@@ -6,9 +6,7 @@ export default function ExperienceSection() {
     <section
       className="
         py-24 px-6
-        bg-[color:var(--color-bg-light)] text-[color:var(--color-text-light)]
-        dark:bg-[color:var(--color-bg-dark)] dark:text-[color:var(--color-text-dark)]
-        hacker:bg-[color:var(--color-bg-hacker)] hacker:text-[color:var(--color-text-hacker)]
+        bg-background text-foreground
         transition-colors duration-500
       "
     >
@@ -24,16 +22,16 @@ export default function ExperienceSection() {
 
         <div className="grid md:grid-cols-2 gap-10">
           <motion.div
-            className="rounded-xl border border-white/10 p-6 shadow-xl bg-black/5 dark:bg-white/5 backdrop-blur"
+            className="rounded-xl border border-border p-6 shadow-xl bg-card/50 backdrop-blur"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <FaCode className="text-xl" />
+              <FaCode className="text-xl text-accent-foreground" />
               <h3 className="text-xl font-semibold">Stack & Expertise</h3>
             </div>
-            <ul className="list-disc pl-5 text-sm opacity-80 space-y-1">
+            <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
               <li>.NET (Framework 4.8+, Core 2.0, ASP.NET MVC)</li>
               <li>React.js, Tailwind CSS, JavaScript</li>
               <li>SQL Server, PostgreSQL, DuckDB</li>
@@ -43,16 +41,16 @@ export default function ExperienceSection() {
           </motion.div>
 
           <motion.div
-            className="rounded-xl border border-white/10 p-6 shadow-xl bg-black/5 dark:bg-white/5 backdrop-blur"
+            className="rounded-xl border border-border p-6 shadow-xl bg-card/50 backdrop-blur"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <FaRocket className="text-xl" />
+              <FaRocket className="text-xl text-accent-foreground" />
               <h3 className="text-xl font-semibold">Career Impact</h3>
             </div>
-            <ul className="list-disc pl-5 text-sm opacity-80 space-y-1">
+            <ul className="list-disc pl-5 text-sm text-muted-foreground space-y-1">
               <li>+65% recovery via CRM (Claro BR)</li>
               <li>+34% billing efficiency (Jequiti)</li>
               <li>+40% scheduling optimization</li>
@@ -63,7 +61,7 @@ export default function ExperienceSection() {
         </div>
 
         <motion.p
-          className="mt-16 text-center text-sm italic opacity-60"
+          className="mt-16 text-center text-sm italic text-muted-foreground"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}

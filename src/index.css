@@ -1,15 +1,129 @@
 @import "tailwindcss";
 
+/* 💡 Fontes personalizadas */
+@theme {
+  --font-amsterdam: "Amsterdam Four", cursive;
+  --font-hacker: 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: "Amsterdam Four";
+  src: url("/fonts/AmsterdamFour.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 🌐 Paleta de cores e tokens visuais */
 @layer base {
   :root {
-    @apply bg-white text-black font-sans;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 100 73% 57%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 100 73% 95%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
+
+    --radius: 0.5rem;
+  }
+
+  /* Dark Mode padrão */
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 9%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+  }
+
+  .light-mode {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 3%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 3%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-mono tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-green-500/30 text-white;
+  }
+
+  .light-mode {
+    @apply bg-white text-zinc-900;
+  }
+
+  .light-mode ::selection {
+    @apply bg-green-500/30 text-zinc-900;
   }
 
   .dark {
-    @apply bg-zinc-900 text-white font-sans;
+    @apply bg-background text-foreground font-sans;
   }
 
   .hacker {
-    @apply bg-black text-green-400 font-mono;
+    @apply bg-black text-[color:var(--color-text-hacker)] font-[var(--font-hacker)];
   }
 }

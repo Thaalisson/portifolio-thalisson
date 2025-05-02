@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 const bootLines = [
   "> Initializing system...",
-  "> Loading Dev Kernel...",
   "> Connecting to GitHub...",
   "> Syncing portfolio layout...",
   "> Boot complete. Welcome.",
+  "> Thalisson Portifolio",
 ];
 
 export default function WelcomeBoot({ onComplete }) {
