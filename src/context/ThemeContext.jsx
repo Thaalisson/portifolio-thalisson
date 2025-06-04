@@ -6,20 +6,16 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState("dark");
 
   const cycleTheme = () => {
-    setTheme((prev) =>
-      prev === "light" ? "dark" : prev === "dark" ? "hacker" : "light"
-    );
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   useEffect(() => {
     const html = document.documentElement;
-    html.classList.remove("light-mode", "dark", "hacker");
-  
+    html.classList.remove("light-mode", "dark");
+
     if (theme === "light") html.classList.add("light-mode");
-    else if (theme === "dark") html.classList.add("dark");
-    else html.classList.add("hacker"); // modo hacker customizado
+    else html.classList.add("dark");
   }, [theme]);
-  
 
   return (
     <ThemeContext.Provider value={{ theme, cycleTheme }}>

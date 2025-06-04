@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 /* 💡 Fontes personalizadas */
-@theme {
-  --font-amsterdam: "Amsterdam Four", cursive;
-  --font-hacker: 'Courier New', monospace;
-}
-
 @font-face {
   font-family: "Amsterdam Four";
   src: url("/fonts/AmsterdamFour.ttf") format("truetype");
@@ -16,39 +11,6 @@
 /* 🌐 Paleta de cores e tokens visuais */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-
-    --primary: 100 73% 57%;
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
-
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-
-    --accent: 100 73% 95%;
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 0%;
-
-    --radius: 0.5rem;
-  }
-
-  /* Dark Mode padrão */
-  :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
 
@@ -57,6 +19,9 @@
 
     --popover: 0 0% 3%;
     --popover-foreground: 0 0% 100%;
+
+    --primary: 100 73% 57%;
+    --primary-foreground: 0 0% 0%;
 
     --secondary: 0 0% 9%;
     --secondary-foreground: 0 0% 100%;
@@ -67,8 +32,14 @@
     --accent: 0 0% 9%;
     --accent-foreground: 0 0% 100%;
 
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
     --border: 0 0% 15%;
     --input: 0 0% 15%;
+    --ring: 0 0% 0%;
+
+    --radius: 0.5rem;
   }
 
   .light-mode {
@@ -94,10 +65,15 @@
     --input: 0 0% 90%;
   }
 
-
+  /* Aplicações globais */
+  * {
+    border-color: hsl(var(--border));
+  }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 
@@ -109,19 +85,14 @@
     @apply bg-green-500/30 text-white;
   }
 
-  .light-mode {
-    @apply bg-white text-zinc-900;
-  }
-
   .light-mode ::selection {
-    @apply bg-green-500/30 text-zinc-900;
+    @apply bg-green-500/30;
+    color: rgb(24, 24, 27); /* text-zinc-900 */
   }
 
   .dark {
-    @apply bg-background text-foreground font-sans;
-  }
-
-  .hacker {
-    @apply bg-black text-[color:var(--color-text-hacker)] font-[var(--font-hacker)];
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply font-sans;
   }
 }
