@@ -3,21 +3,18 @@ import { motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
 import bgImage from "../assets/IMG_2459.jpg";
 import { useTheme } from "../context/ThemeContext";
-
-const fullText = "I'm Thalisson Pereira";
-const roles = [
-  "Software Developer",
-  "Fullstack Engineer",
-  "Web Design",
-  ".NET & React.js",
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export default function HeroMain() {
+  const { theme } = useTheme();
+  const { t } = useLanguage();
+  const fullText = t("heroText.fullText");
+  const roles = t("heroText.roles");
+
   const [charIndex, setCharIndex] = useState(0);
   const [roleIndex, setRoleIndex] = useState(0);
   const [subtext, setSubtext] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     if (charIndex < fullText.length) {
@@ -26,7 +23,7 @@ export default function HeroMain() {
       }, 130);
       return () => clearTimeout(timeout);
     }
-  }, [charIndex]);
+  }, [charIndex, fullText]);
 
   useEffect(() => {
     const current = roles[roleIndex];
@@ -49,7 +46,7 @@ export default function HeroMain() {
     }
 
     return () => clearTimeout(timeout);
-  }, [subtext, isDeleting, roleIndex]);
+  }, [subtext, isDeleting, roleIndex, roles]);
 
   return (
     <motion.section
@@ -80,7 +77,7 @@ export default function HeroMain() {
         }}
       />
 
-      {/* Conteúdo */}
+      {/* Text Content */}
       <div className="relative z-10 max-w-2xl">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
           {fullText.slice(0, charIndex)}
@@ -92,7 +89,7 @@ export default function HeroMain() {
         <p
           className="text-xl sm:text-2xl font-medium"
           style={{
-            color: "oklch(72.3% 0.219 149.579)",
+            color: "oklch(72.3% 0.219 149.579)", // Verde elegante
           }}
         >
           {subtext}
@@ -100,7 +97,7 @@ export default function HeroMain() {
         </p>
       </div>
 
-      {/* Ícone de scroll */}
+      {/* Scroll Icon */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-xl"
         animate={{ y: [0, -10, 0] }}

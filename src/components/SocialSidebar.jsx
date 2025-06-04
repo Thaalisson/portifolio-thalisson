@@ -29,14 +29,14 @@ const SocialSidebar = () => {
 
       <div className="fixed bottom-0 right-6 z-30 lg:flex hidden flex-col items-center text-sm text-[hsl(var(--foreground))]">
         <motion.a
-          href="mailto:thalisson@example.com"
+          href="mailto:thalisson_21@icloud.com"
           className="font-mono tracking-widest text-xs hover:-translate-y-1 transition-all duration-300"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           style={{ writingMode: "vertical-rl" }}
         >
-          thalisson@example.com
+          thalisson_21@icloud.com
         </motion.a>
         <div className="w-[1px] h-24 bg-slate-400 mt-6"></div>
       </div>

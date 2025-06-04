@@ -39,6 +39,15 @@ export const LanguageProvider = ({ children }) => {
         exploreWork: 'Explore My Work',
         getInTouch: 'Get In Touch'
       },
+      heroText: {
+        fullText: "I'm Thalisson Pereira",
+        roles: [
+          "Software Developer",
+          "Fullstack Engineer",
+          "Web Design",
+          ".NET & React.js"
+        ]
+      },
       about: {
         title: 'Full Stack Developer',
         heading: 'Crafting digital experiences with code',
@@ -95,6 +104,15 @@ export const LanguageProvider = ({ children }) => {
         descriptionSub: 'Estética frontend encontra eficiência backend.',
         exploreWork: 'Explore Meu Trabalho',
         getInTouch: 'Entre em Contato'
+      },
+      heroText: {
+        fullText: "Eu sou o Thalisson Pereira",
+        roles: [
+          "Desenvolvedor de Software",
+          "Engenheiro Fullstack",
+          "Design Web",
+          ".NET & React.js"
+        ]
       },
       about: {
         title: 'Full Stack Developer',

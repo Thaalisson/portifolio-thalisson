@@ -8,9 +8,12 @@ import SocialSidebar from "./components/SocialSidebar";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import { LanguageProvider } from "./context/LanguageContext";
+import ContactSection from "./components/ContactSection";
+import BlogSection from "./components/BlogSection";
+
 
 export default function App() {
-  const [booted, setBooted] = useState(false);
+  const [booted, setBooted] = useState(true);
 
   return (
     <LanguageProvider>
@@ -26,6 +29,8 @@ export default function App() {
             <About />
             <CardSection />
             <ExperienceSection />
+            <BlogSection />
+            <ContactSection/>
           </>
         )}
       </AnimatePresence>

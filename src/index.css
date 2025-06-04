@@ -1,16 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
-/* 💡 Fontes personalizadas */
-@font-face {
-  font-family: "Amsterdam Four";
-  src: url("/fonts/AmsterdamFour.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* 🌐 Paleta de cores e tokens visuais */
 @layer base {
   :root {
+    --font-primary: 'Inter', sans-serif;
+
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
 
@@ -65,12 +59,12 @@
     --input: 0 0% 90%;
   }
 
-  /* Aplicações globais */
   * {
     border-color: hsl(var(--border));
   }
 
   body {
+    font-family: var(--font-primary);
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     @apply antialiased;
@@ -87,12 +81,11 @@
 
   .light-mode ::selection {
     @apply bg-green-500/30;
-    color: rgb(24, 24, 27); /* text-zinc-900 */
+    color: rgb(24, 24, 27);
   }
 
   .dark {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    @apply font-sans;
   }
 }
