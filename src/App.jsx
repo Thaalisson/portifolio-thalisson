@@ -13,7 +13,7 @@ import BlogSection from "./components/BlogSection";
 
 
 export default function App() {
-  const [booted, setBooted] = useState(true);
+  const [booted, setBooted] = useState(false);
 
   return (
     <LanguageProvider>
