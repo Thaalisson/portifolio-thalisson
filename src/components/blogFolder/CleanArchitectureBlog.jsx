@@ -11,7 +11,8 @@ export default function CleanArchitectureBlog() {
       title: "What is Clean Architecture?",
       content: (
         <>
-          Clean Architecture is a software design philosophy proposed by Robert C. Martin ("Uncle Bob") that aims to separate concerns into well-defined layers, promoting <strong>maintainability, testability, and decoupling</strong>.
+          Clean Architecture is a software design philosophy proposed by Robert C. Martin ("Uncle Bob") that aims to separate concerns into well-defined layers, promoting{" "}
+          <strong>maintainability, testability, and decoupling</strong>.
           <br /><br />
           The core idea is that business rules should not depend on frameworks, UI, databases, or any external details.
         </>
@@ -50,54 +51,94 @@ public class CreateOrderHandler {
     },
   ];
 
+  const isLastStep = step === steps.length - 1;
+
+  const handleNext = () => {
+    if (isLastStep) {
+      setStep(0); // Reinicia ao final
+    } else {
+      setStep(step + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
   return (
     <section className="py-20 px-6 bg-background text-foreground transition-all duration-500">
       <div className="max-w-3xl mx-auto text-center">
+
+        {/* Título e subtítulo */}
         <motion.h2
-          className="text-4xl font-bold mb-4"
+          className="text-4xl font-bold mb-2"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           Understanding Clean Architecture
         </motion.h2>
-        <p className="text-muted-foreground mb-12 text-lg">
+        <p className="text-muted-foreground mb-8 text-lg max-w-2xl mx-auto">
           Learn the principles behind a clean, scalable, and maintainable architecture.
         </p>
 
+        {/* Indicadores de progresso */}
+        <div className="flex justify-center gap-2 mb-8">
+          {steps.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === step ? "bg-green-500 scale-125" : "bg-muted"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Conteúdo principal */}
         <div className="bg-card border border-border rounded-xl p-6 shadow-xl text-left space-y-6">
           <div className="flex items-center gap-3">
             {steps[step].icon}
             <h3 className="text-2xl font-semibold">{steps[step].title}</h3>
           </div>
+
           <motion.div
-            className="text-base leading-relaxed"
             key={step}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
+            aria-live="polite"
+            className="text-base leading-relaxed"
           >
             {steps[step].content}
           </motion.div>
         </div>
 
+        {/* Navegação */}
         <div className="flex justify-center gap-4 mt-10">
-          {step > 0 && (
-            <button
-              onClick={() => setStep(step - 1)}
-              className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-md transition"
-            >
-              Back
-            </button>
-          )}
-          {step < steps.length - 1 && (
-            <button
-              onClick={() => setStep(step + 1)}
-              className="px-4 py-2 bg-green-600 hover:bg-green-500 text-white rounded-md transition"
-            >
-              Next
-            </button>
-          )}
+          <button
+            onClick={handleBack}
+            disabled={step === 0}
+            className={`px-4 py-2 rounded-md font-semibold transition ${
+              step === 0
+                ? "bg-muted text-muted-foreground cursor-not-allowed"
+                : "bg-zinc-800 hover:bg-zinc-700 text-white"
+            }`}
+          >
+            Back
+          </button>
+
+          <button
+            onClick={handleNext}
+            className={`px-4 py-2 rounded-md font-semibold transition ${
+              isLastStep
+                ? "bg-green-700 hover:bg-green-600 text-white"
+                : "bg-green-600 hover:bg-green-500 text-white"
+            }`}
+          >
+            {isLastStep ? "Restart" : "Next"}
+          </button>
         </div>
       </div>
     </section>

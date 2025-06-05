@@ -18,6 +18,9 @@ export default function Blog() {
         {/* Cabeçalho e tabs */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">Developer Insights</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-6">
+            Sharing concepts, applying architecture patterns, and breaking down complex ideas step-by-step.
+          </p>
 
           <div className="flex flex-wrap justify-center gap-3">
             {posts.map((post) => (
