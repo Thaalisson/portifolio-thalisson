@@ -8,24 +8,20 @@ export default function ContactSection() {
       className="py-24 px-6 bg-background text-foreground transition-colors duration-500"
     >
       <div className="max-w-5xl mx-auto">
-        {/* Título e descrição */}
         <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold tracking-tight">
-            Let’s get in touch
-          </h2>
+          <h2 className="text-4xl font-bold tracking-tight">Let's get in touch</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-            Whether it's a new project, a freelance opportunity, or just to say hi — I'm always open to meaningful connections.
+            Whether it's a new project, a freelance opportunity, or just to say hi, I'm
+            always open to meaningful connections.
           </p>
         </motion.div>
 
-        {/* Conteúdo principal */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Informações de contato */}
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, x: -30 }}
@@ -46,7 +42,6 @@ export default function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Formulário */}
           <motion.form
             className="bg-card/50 backdrop-blur border border-border rounded-xl p-6 space-y-4"
             initial={{ opacity: 0, x: 30 }}

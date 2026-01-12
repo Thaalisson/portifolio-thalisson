@@ -36,7 +36,7 @@ const apps = [
     icon: <FaUserShield size={24} className="text-green-500" />,
   },
   {
-    title: "Website (Psicóloga Erivan)",
+    title: "Website (Psicologa Erivan)",
     description: "Professional site - React + Tailwind + Framer Motion",
     icon: <FaGlobe size={24} className="text-green-500" />,
     link: "https://psicologaerivan.com.br/#home",

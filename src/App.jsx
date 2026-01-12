@@ -13,7 +13,7 @@ import BlogSection from "./components/BlogSection";
 
 
 export default function App() {
-  const [booted, setBooted] = useState(true);
+  const [booted, setBooted] = useState(false);
 
   return (
     <LanguageProvider>
@@ -30,7 +30,7 @@ export default function App() {
             <CardSection />
             <ExperienceSection />
             <BlogSection />
-            <ContactSection/>
+            <ContactSection />
           </>
         )}
       </AnimatePresence>

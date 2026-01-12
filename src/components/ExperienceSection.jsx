@@ -4,15 +4,11 @@ import {
   Database,
   GitBranch,
   FileCode,
-  CloudCog,
   TerminalSquare,
   Settings2,
-  Wrench,
   LayoutDashboard,
-  Code2,
   Layers,
   ClipboardList,
-  Activity,
   UserCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";

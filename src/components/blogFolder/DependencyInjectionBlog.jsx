@@ -20,13 +20,14 @@ export default function DependencyInjectionBlog() {
       content: (
         <>
           Dependency Injection (DI) is a design pattern that promotes{" "}
-          <strong>decoupling</strong> between classes.
-          Instead of a class creating its dependencies, they are{" "}
-          <strong>provided externally</strong> — by a framework or container.
+          <strong>decoupling</strong> between classes. Instead of a class creating its
+          dependencies, they are <strong>provided externally</strong> by a framework or
+          container.
           <br />
           <br />
           Real example: a <code>Controller</code> receives a configured{" "}
-          <code>Service</code> instance instead of instantiating it manually with <code>new</code>.
+          <code>Service</code> instance instead of instantiating it manually with{" "}
+          <code>new</code>.
         </>
       ),
     },
@@ -73,7 +74,7 @@ public class UserController {
           </li>
           <li className="flex items-start gap-3">
             <BrainCircuit className="w-5 h-5 mt-1 text-primary" />
-            <span>Reduces tight coupling → cleaner code</span>
+            <span>Reduces tight coupling and keeps code cleaner</span>
           </li>
         </ul>
       ),
@@ -84,7 +85,7 @@ public class UserController {
 
   const handleNext = () => {
     if (isLastStep) {
-      setStep(0); // Reinicia
+      setStep(0);
     } else {
       setStep(step + 1);
     }
@@ -99,8 +100,6 @@ public class UserController {
   return (
     <section className="py-20 px-6 bg-background text-foreground transition-all duration-500">
       <div className="max-w-3xl mx-auto text-center">
-
-        {/* Título e subtítulo */}
         <motion.h2
           className="text-4xl font-bold mb-2"
           initial={{ opacity: 0, y: -20 }}
@@ -110,10 +109,10 @@ public class UserController {
           Understanding Dependency Injection (DI)
         </motion.h2>
         <p className="text-muted-foreground mb-8 text-lg max-w-2xl mx-auto">
-          Learn the concept step-by-step with animations, code samples, and real-world examples.
+          Learn the concept step-by-step with animations, code samples, and real-world
+          examples.
         </p>
 
-        {/* Indicadores de progresso */}
         <div className="flex justify-center gap-2 mb-8">
           {steps.map((_, index) => (
             <div
@@ -125,7 +124,6 @@ public class UserController {
           ))}
         </div>
 
-        {/* Conteúdo atual */}
         <div className="bg-card border border-border rounded-xl p-6 shadow-xl text-left space-y-6">
           <div className="flex items-center gap-3">
             {steps[step].icon}
@@ -144,7 +142,6 @@ public class UserController {
           </motion.div>
         </div>
 
-        {/* Navegação */}
         <div className="flex justify-center gap-4 mt-10">
           <button
             onClick={handleBack}

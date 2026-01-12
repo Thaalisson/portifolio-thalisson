@@ -6,7 +6,7 @@ const bootLines = [
   "> Connecting to GitHub...",
   "> Syncing portfolio layout...",
   "> Boot complete. Welcome.",
-  "> Thalisson Portifolio",
+  "> Thalisson Portfolio",
 ];
 
 export default function WelcomeBoot({ onComplete }) {
@@ -17,24 +17,24 @@ export default function WelcomeBoot({ onComplete }) {
   const [typing, setTyping] = useState(false);
   const audioRef = useRef(null);
 
-  // 🔊 Inicia o áudio com clique do usuário
   const startSequence = () => {
     const audio = new Audio("/songs/typing.mp3");
-    audio.play().then(() => {
-      audio.pause();
-      audio.currentTime = 0;
-      audioRef.current = audio;
-      setStarted(true);
-      setTyping(true);
-    }).catch(() => {
-      // mesmo se bloqueado, continua
-      audioRef.current = audio;
-      setStarted(true);
-      setTyping(true);
-    });
+    audio
+      .play()
+      .then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audioRef.current = audio;
+        setStarted(true);
+        setTyping(true);
+      })
+      .catch(() => {
+        audioRef.current = audio;
+        setStarted(true);
+        setTyping(true);
+      });
   };
 
-  // ⌨️ Digitação com som
   useEffect(() => {
     if (!typing || currentLine >= bootLines.length) return;
 
@@ -46,7 +46,6 @@ export default function WelcomeBoot({ onComplete }) {
       setCurrentText(fullLine.slice(0, charIndex + 1));
       charIndex++;
 
-      // toca som para caracteres
       if (/[a-zA-Z0-9]/.test(char) && audioRef.current) {
         const sfx = audioRef.current.cloneNode();
         sfx.play().catch(() => {});
@@ -65,13 +64,13 @@ export default function WelcomeBoot({ onComplete }) {
     return () => clearInterval(interval);
   }, [currentLine, typing]);
 
-  // 🚀 Após finalização
   useEffect(() => {
     if (started && currentLine >= bootLines.length) {
       setTyping(false);
-      setTimeout(onComplete, 1000);
+      const timeout = setTimeout(onComplete, 1000);
+      return () => clearTimeout(timeout);
     }
-  }, [currentLine, started]);
+  }, [currentLine, onComplete, started]);
 
   return (
     <motion.div
@@ -92,7 +91,9 @@ export default function WelcomeBoot({ onComplete }) {
       ) : (
         <div className="w-full max-w-md bg-black/70 p-6 rounded-md border border-green-500 shadow-[0_0_20px_#22ff22] text-sm">
           {lines.map((line, i) => (
-            <p key={i} className="leading-5 whitespace-pre-wrap">{line}</p>
+            <p key={i} className="leading-5 whitespace-pre-wrap">
+              {line}
+            </p>
           ))}
           {typing && (
             <p className="leading-5 whitespace-pre-wrap">

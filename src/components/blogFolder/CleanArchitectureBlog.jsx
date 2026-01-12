@@ -11,10 +11,13 @@ export default function CleanArchitectureBlog() {
       title: "What is Clean Architecture?",
       content: (
         <>
-          Clean Architecture is a software design philosophy proposed by Robert C. Martin ("Uncle Bob") that aims to separate concerns into well-defined layers, promoting{" "}
+          Clean Architecture is a software design philosophy proposed by Robert C. Martin
+          ("Uncle Bob") that aims to separate concerns into well-defined layers, promoting{" "}
           <strong>maintainability, testability, and decoupling</strong>.
-          <br /><br />
-          The core idea is that business rules should not depend on frameworks, UI, databases, or any external details.
+          <br />
+          <br />
+          The core idea is that business rules should not depend on frameworks, UI,
+          databases, or any external details.
         </>
       ),
     },
@@ -23,10 +26,18 @@ export default function CleanArchitectureBlog() {
       title: "Main Layers",
       content: (
         <ul className="list-disc list-inside space-y-2 text-left">
-          <li><strong>Entities</strong> – Core domain business rules</li>
-          <li><strong>Use Cases</strong> – Application-specific logic orchestrating entities</li>
-          <li><strong>Interface Adapters</strong> – Controllers, DTOs, Repositories</li>
-          <li><strong>Frameworks & Drivers</strong> – UI, Database, APIs, external tools</li>
+          <li>
+            <strong>Entities</strong> - Core domain business rules
+          </li>
+          <li>
+            <strong>Use Cases</strong> - Application-specific logic orchestrating entities
+          </li>
+          <li>
+            <strong>Interface Adapters</strong> - Controllers, DTOs, Repositories
+          </li>
+          <li>
+            <strong>Frameworks & Drivers</strong> - UI, Database, APIs, external tools
+          </li>
         </ul>
       ),
     },
@@ -55,7 +66,7 @@ public class CreateOrderHandler {
 
   const handleNext = () => {
     if (isLastStep) {
-      setStep(0); // Reinicia ao final
+      setStep(0);
     } else {
       setStep(step + 1);
     }
@@ -70,8 +81,6 @@ public class CreateOrderHandler {
   return (
     <section className="py-20 px-6 bg-background text-foreground transition-all duration-500">
       <div className="max-w-3xl mx-auto text-center">
-
-        {/* Título e subtítulo */}
         <motion.h2
           className="text-4xl font-bold mb-2"
           initial={{ opacity: 0, y: -20 }}
@@ -84,7 +93,6 @@ public class CreateOrderHandler {
           Learn the principles behind a clean, scalable, and maintainable architecture.
         </p>
 
-        {/* Indicadores de progresso */}
         <div className="flex justify-center gap-2 mb-8">
           {steps.map((_, index) => (
             <div
@@ -96,7 +104,6 @@ public class CreateOrderHandler {
           ))}
         </div>
 
-        {/* Conteúdo principal */}
         <div className="bg-card border border-border rounded-xl p-6 shadow-xl text-left space-y-6">
           <div className="flex items-center gap-3">
             {steps[step].icon}
@@ -115,7 +122,6 @@ public class CreateOrderHandler {
           </motion.div>
         </div>
 
-        {/* Navegação */}
         <div className="flex justify-center gap-4 mt-10">
           <button
             onClick={handleBack}

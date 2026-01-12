@@ -11,7 +11,7 @@ export default function LanguageToggle() {
           language === "en" ? "font-bold underline" : "opacity-60"
         }`}
       >
-        🇺🇸 EN
+        EN
       </button>
       <span>/</span>
       <button
@@ -20,7 +20,7 @@ export default function LanguageToggle() {
           language === "pt" ? "font-bold underline" : "opacity-60"
         }`}
       >
-        🇧🇷 PT
+        PT
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin, Mail, Code } from "lucide-react";
+import { Github, Twitter, Linkedin, Code } from "lucide-react";
 import { motion } from "framer-motion";
 
 const SocialSidebar = () => {
