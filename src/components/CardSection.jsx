@@ -8,42 +8,45 @@ import {
   FaGlobe,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 const apps = [
   {
     title: "Booking App",
     description: "Manage appointments and schedules",
-    icon: <FaCalendarAlt size={24} className="text-green-500" />,
+    icon: <FaCalendarAlt size={24} className="text-primary" />,
   },
   {
     title: "Form Builder",
     description: "Create custom forms dynamically",
-    icon: <FaWpforms size={24} className="text-green-500" />,
+    icon: <FaWpforms size={24} className="text-primary" />,
   },
   {
     title: "Analytics Dashboard",
     description: "Visualize data and metrics",
-    icon: <FaChartLine size={24} className="text-green-500" />,
+    icon: <FaChartLine size={24} className="text-primary" />,
   },
   {
     title: "Theme Customizer",
     description: "Adjust colors and styles",
-    icon: <FaPalette size={24} className="text-green-500" />,
+    icon: <FaPalette size={24} className="text-primary" />,
   },
   {
     title: "User Manager",
     description: "Handle user accounts and roles",
-    icon: <FaUserShield size={24} className="text-green-500" />,
+    icon: <FaUserShield size={24} className="text-primary" />,
   },
   {
     title: "Website (Psicologa Erivan)",
     description: "Professional site - React + Tailwind + Framer Motion",
-    icon: <FaGlobe size={24} className="text-green-500" />,
+    icon: <FaGlobe size={24} className="text-primary" />,
     link: "https://psicologaerivan.com.br/#home",
   },
 ];
 
 export default function CardSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       className="py-24 px-6 bg-background text-foreground transition-colors duration-500"
@@ -56,7 +59,7 @@ export default function CardSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Featured Projects
+          {t("projects.title")}
         </motion.h2>
         <motion.p
           className="text-muted-foreground text-base max-w-2xl mx-auto mt-4"
@@ -64,7 +67,7 @@ export default function CardSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Explore some of the key apps and tools I've built and published.
+          {t("projects.subtitle")}
         </motion.p>
       </div>
 

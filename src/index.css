@@ -1,62 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --font-primary: 'Inter', sans-serif;
+    --font-primary: 'Manrope', sans-serif;
+    --font-display: 'Manrope', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
 
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 3%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 3%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 100 73% 57%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 144 68% 45%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 9%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 9%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 0 0% 9%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 16%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 0%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 144 68% 45%;
 
     --radius: 0.5rem;
+
+    --page-bg:
+      radial-gradient(800px 520px at 8% -12%, hsl(144 68% 45% / 0.18), transparent 60%),
+      radial-gradient(680px 460px at 92% 12%, hsl(0 0% 100% / 0.08), transparent 55%),
+      linear-gradient(180deg, hsl(0 0% 5%), hsl(0 0% 3%));
   }
 
   .light-mode {
     --background: 0 0% 100%;
-    --foreground: 0 0% 3%;
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3%;
+    --popover-foreground: 0 0% 10%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 3%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 0 0% 96%;
+    --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 3%;
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 10%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+
+    --page-bg:
+      radial-gradient(900px 600px at 10% -10%, hsl(144 68% 45% / 0.12), transparent 60%),
+      radial-gradient(700px 500px at 90% 10%, hsl(0 0% 0% / 0.05), transparent 55%),
+      linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 96%));
   }
 
   * {
@@ -67,25 +80,80 @@
     font-family: var(--font-primary);
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    background-image: var(--page-bg);
+    background-attachment: fixed;
+    background-size: cover;
     @apply antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-mono tracking-tight;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    color: hsl(var(--primary));
   }
 
   ::selection {
-    @apply bg-green-500/30 text-white;
+    @apply text-white;
+    background-color: hsl(var(--primary) / 0.3);
   }
 
   .light-mode ::selection {
-    @apply bg-green-500/30;
-    color: rgb(24, 24, 27);
+    background-color: hsl(var(--primary) / 0.25);
+    color: rgb(17, 24, 39);
   }
 
   .dark {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+  }
+
+  .contact-card {
+    background-color: #fff;
+  }
+
+  .light-mode .contact-card {
+    background-color: hsl(0 0% 92%);
+    border-color: hsl(0 0% 82%);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .contact-card button[type="submit"] {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .light-mode .contact-card button[type="submit"] {
+    background-color: hsl(var(--primary));
+    color: #fff;
+  }
+
+  .contact-card input,
+  .contact-card textarea {
+    background-color: hsl(0 0% 96%);
+    border-color: hsl(0 0% 70%);
+    color: hsl(0 0% 10%);
+  }
+
+  .contact-card input::placeholder,
+  .contact-card textarea::placeholder {
+    color: hsl(0 0% 45%);
+  }
+
+  .contact-card input:focus,
+  .contact-card textarea:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.15);
+  }
+
+  .light-mode .contact-card input,
+  .light-mode .contact-card textarea {
+    background-color: hsl(0 0% 98%);
+    border-color: hsl(0 0% 75%);
+    color: hsl(0 0% 10%);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
   }
 }

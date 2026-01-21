@@ -49,17 +49,28 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative ${
         scrolled
           ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
           : "bg-transparent"
       }`}
     >
+      <div
+        className={`absolute top-0 left-0 right-0 h-[3px] z-[60] ${
+          theme === "light" ? "bg-black" : "bg-white"
+        }`}
+        style={{
+          boxShadow:
+            theme === "light"
+              ? "0 0 12px rgba(0,0,0,0.35)"
+              : "0 0 12px rgba(255,255,255,0.6)",
+        }}
+      />
       <div className="flex items-center justify-between h-16 px-6 lg:px-8">
         <div className="shrink-0 mr-auto">
           <button
             onClick={() => scrollToSection("home")}
-            className="font-mono text-xl font-bold text-foreground hover:text-green-600 transition-colors"
+            className="text-sm font-semibold tracking-[0.2em] uppercase text-foreground hover:text-primary transition-colors"
           >
             &lt;Portfolio /&gt;
           </button>
@@ -71,10 +82,10 @@ const Navbar = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-4 py-2 rounded-lg font-mono transition-all duration-300 ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
                   activeSection === item.id
-                    ? "text-green-600 bg-green-50 dark:bg-green-900/30"
-                    : "text-foreground hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                    ? "text-primary bg-primary/10"
+                    : "text-foreground/90 hover:text-primary hover:bg-primary/10"
                 }`}
               >
                 {item.label}
@@ -82,10 +93,10 @@ const Navbar = () => {
             ))}
             <button
               onClick={() => scrollToSection("contact")}
-              className={`ml-4 px-6 py-2 rounded-lg font-mono transition-all duration-300 ${
+              className={`ml-4 px-6 py-2 rounded-lg text-sm font-semibold tracking-[0.08em] transition-all duration-300 ${
                 activeSection === "contact"
-                  ? "text-green-600 bg-green-50 dark:bg-green-900/30"
-                  : "text-foreground hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  ? "text-primary bg-primary/10"
+                  : "text-foreground/90 hover:text-primary hover:bg-primary/10"
               }`}
             >
               {t("nav.contact")}
@@ -95,14 +106,14 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-2 border-l border-border pl-4">
             <button
               onClick={cycleTheme}
-              className="p-2 rounded-lg text-foreground hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all duration-300"
+              className="p-2 rounded-lg text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
               title={theme === "light" ? "Dark mode" : "Light mode"}
             >
               {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
             </button>
             <button
               onClick={toggleLanguage}
-              className="p-2 rounded-lg text-foreground hover:text-green-600 font-mono text-sm flex items-center gap-1 transition-all duration-300"
+              className="p-2 rounded-lg text-foreground hover:text-primary text-xs font-semibold tracking-[0.2em] flex items-center gap-1 transition-all duration-300"
               title="Change language"
             >
               <Globe size={16} />
@@ -114,7 +125,7 @@ const Navbar = () => {
             <button onClick={cycleTheme}>
               {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
             </button>
-            <button onClick={toggleLanguage} className="text-sm font-mono">
+            <button onClick={toggleLanguage} className="text-xs font-semibold tracking-[0.2em]">
               {language.toUpperCase()}
             </button>
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -135,10 +146,10 @@ const Navbar = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-4 py-3 rounded-lg font-mono transition-all duration-300 ${
+                className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
                   activeSection === item.id
-                    ? "text-green-600 bg-green-50 dark:bg-green-900/30"
-                    : "text-foreground hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                    ? "text-primary bg-primary/10"
+                    : "text-foreground/90 hover:text-primary hover:bg-primary/10"
                 }`}
               >
                 {item.label}

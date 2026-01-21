@@ -35,7 +35,7 @@ export default function DependencyInjectionBlog() {
       icon: <GitBranch className="text-primary w-6 h-6" />,
       title: "C# Practical Example",
       content: (
-        <pre className="bg-zinc-900 text-green-200 p-4 rounded-md text-sm overflow-auto">
+        <pre className="bg-zinc-900 text-primary/80 p-4 rounded-md text-sm overflow-auto">
 {`public interface IEmailService {
     void Send(string to, string message);
 }
@@ -118,7 +118,7 @@ public class UserController {
             <div
               key={index}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === step ? "bg-green-500 scale-125" : "bg-muted"
+                index === step ? "bg-primary scale-125" : "bg-muted"
               }`}
             />
           ))}
@@ -159,8 +159,8 @@ public class UserController {
             onClick={handleNext}
             className={`px-4 py-2 rounded-md font-semibold transition ${
               isLastStep
-                ? "bg-green-700 hover:bg-green-600 text-white"
-                : "bg-green-600 hover:bg-green-500 text-white"
+                ? "bg-primary/90 hover:bg-primary text-white"
+                : "bg-primary hover:bg-primary/90 text-white"
             }`}
           >
             {isLastStep ? "Restart" : "Next"}

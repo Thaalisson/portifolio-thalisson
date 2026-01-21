@@ -14,16 +14,16 @@ export default function About() {
         <div className="flex flex-col md:flex-row items-center">
           {/* Left Text Content */}
           <div className="md:w-3/5 space-y-6">
-            <span className="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium animate-fade-in">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border border-primary/20 bg-primary/10 text-primary animate-fade-in">
               {t("about.title")}
             </span>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-slide-right">
-              Crafting digital experiences with code
-              <span className="text-green-500">.</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-slide-right">
+              {t("about.heading")}
+              <span className="text-primary">.</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg animate-slide-up">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed animate-slide-up">
               {t("about.paragraph1")}
               <br /><br />
               {t("about.paragraph2")}
@@ -36,8 +36,8 @@ export default function About() {
           <div className="mt-10 md:mt-0 md:w-2/5 animate-fade-in">
             <div className="relative">
               <div className="absolute -inset-1 bg-green-100 rounded-2xl transform rotate-3"></div>
-              <div className="relative bg-black rounded-2xl overflow-hidden aspect-square">
-                <div className="p-8 text-white font-mono text-lg">
+              <div className="relative bg-black rounded-2xl overflow-hidden aspect-square border border-border">
+                <div className="p-8 text-white text-lg">
                   <div className="mb-4 flex items-center">
                     <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -45,29 +45,29 @@ export default function About() {
                   </div>
                   <pre className="overflow-auto">
                     <code>
-                      <span className="text-green-50">const</span>{" "}
+                      <span className="text-primary">const</span>{" "}
                       <span className="text-white">developer</span> = {"{"}
                       <br />{"  "}
-                      <span className="text-green-100">name</span>:{" "}
-                      <span className="text-green-400">'{dev.name}'</span>,
+                      <span className="text-primary">name</span>:{" "}
+                      <span className="text-primary">'{dev.name}'</span>,
                       <br />{"  "}
-                      <span className="text-green-100">role</span>:{" "}
-                      <span className="text-green-400">'{role}'</span>,
+                      <span className="text-primary">role</span>:{" "}
+                      <span className="text-primary">'{role}'</span>,
                       <br />{"  "}
-                      <span className="text-green-100">loves</span>: [
+                      <span className="text-primary">loves</span>: [
                       <br />{"    "}
-                      <span className="text-green-400">'{loves[0]}'</span>,
+                      <span className="text-primary">'{loves[0]}'</span>,
                       <br />{"    "}
-                      <span className="text-green-400">'{loves[1]}'</span>,
+                      <span className="text-primary">'{loves[1]}'</span>,
                       <br />{"    "}
-                      <span className="text-green-400">'{loves[2]}'</span>
+                      <span className="text-primary">'{loves[2]}'</span>
                       <br />{"  "}],
                       <br />{"  "}
-                      <span className="text-green-100">greet</span>:{" "}
-                      <span className="text-green-50">function</span>() {"{"}
+                      <span className="text-primary">greet</span>:{" "}
+                      <span className="text-primary">function</span>() {"{"}
                       <br />{"    "}
-                      <span className="text-green-50">return</span>{" "}
-                      <span className="text-green-400">'{greet}'</span>;
+                      <span className="text-primary">return</span>{" "}
+                      <span className="text-primary">'{greet}'</span>;
                       <br />{"  }"}
                       <br />
                     </code>

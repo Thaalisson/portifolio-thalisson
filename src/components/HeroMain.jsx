@@ -57,9 +57,8 @@ export default function HeroMain() {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.8 }}
       className={`
-        min-h-screen px-6 py-20 relative flex items-center justify-start
-        transition-colors duration-500 font-sans
-        ${theme === "light" ? "text-black" : "text-white"}
+        min-h-screen px-6 py-24 relative flex items-center justify-start
+        transition-colors duration-500 text-foreground
       `}
       style={{
         backgroundImage: `url(${bgImage})`,
@@ -73,14 +72,18 @@ export default function HeroMain() {
         style={{
           backgroundColor:
             theme === "dark"
-              ? "rgba(0, 0, 0, 0.6)"
-              : "rgba(255, 255, 255, 0.7)",
+              ? "rgba(8, 12, 18, 0.65)"
+              : "rgba(248, 250, 252, 0.7)",
+          backgroundImage:
+            theme === "dark"
+              ? "linear-gradient(120deg, rgba(10, 16, 24, 0.9), rgba(10, 16, 24, 0.55))"
+              : "linear-gradient(120deg, rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.65))",
         }}
       />
 
       {/* Text Content */}
       <div className="relative z-10 max-w-2xl">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] mb-4">
           {fullText.slice(0, charIndex)}
           {charIndex < fullText.length && (
             <span className="ml-1 border-r-2 animate-pulse" />
@@ -88,10 +91,7 @@ export default function HeroMain() {
         </h1>
 
         <p
-          className="text-xl sm:text-2xl font-medium"
-          style={{
-            color: "oklch(72.3% 0.219 149.579)", // Verde elegante
-          }}
+          className="text-xl sm:text-2xl font-semibold text-primary"
         >
           {subtext}
           {subtext && <span className="ml-1 border-r-2 animate-pulse" />}
@@ -100,7 +100,7 @@ export default function HeroMain() {
 
       {/* Scroll Icon */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-xl"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-foreground/80 text-xl"
         animate={{ y: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >

@@ -12,6 +12,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
 
 const skills = [
   {
@@ -83,6 +84,8 @@ const skills = [
 ];
 
 export default function SkillsGridSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       className="py-24 px-6 bg-background text-foreground transition-colors duration-500"
@@ -95,7 +98,7 @@ export default function SkillsGridSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Skills
+          {t("skills.title")}
         </motion.h2>
 
         <motion.p
@@ -104,7 +107,7 @@ export default function SkillsGridSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          I architect scalable applications using a modern and complete stack, combining clean code, DevOps practices, and product thinking.
+          {t("skills.subtitle")}
         </motion.p>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-10">
@@ -116,7 +119,7 @@ export default function SkillsGridSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.04 }}
             >
-              <skill.icon className="text-green-500 mt-1 flex-shrink-0" size={28} />
+              <skill.icon className="text-primary mt-1 flex-shrink-0" size={28} />
               <div>
                 <h3 className="text-lg font-bold">{skill.title}</h3>
                 <p className="text-base text-muted-foreground leading-snug">

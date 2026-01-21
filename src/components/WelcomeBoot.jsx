@@ -75,21 +75,29 @@ export default function WelcomeBoot({ onComplete }) {
   return (
     <motion.div
       key="boot"
-      className="min-h-screen flex items-center justify-center bg-black text-green-400 font-mono px-4"
+      className="min-h-screen flex items-center justify-center bg-black text-primary font-mono px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
       {!started ? (
-        <button
-          onClick={startSequence}
-          className="px-6 py-3 text-sm font-semibold border border-green-500 rounded shadow-lg hover:bg-green-500 hover:text-black transition"
-        >
-          Start Boot Sequence
-        </button>
+        <div className="flex flex-col items-center gap-4">
+          <button
+            onClick={startSequence}
+            className="px-6 py-3 text-xs font-semibold tracking-[0.2em] uppercase border border-primary rounded shadow-lg hover:bg-primary hover:text-black transition"
+          >
+            Start Boot Sequence
+          </button>
+          <button
+            onClick={onComplete}
+            className="text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition"
+          >
+            Skip Intro
+          </button>
+        </div>
       ) : (
-        <div className="w-full max-w-md bg-black/70 p-6 rounded-md border border-green-500 shadow-[0_0_20px_#22ff22] text-sm">
+        <div className="w-full max-w-md bg-black/70 p-6 rounded-md border border-primary shadow-[0_0_20px_hsl(var(--primary))] text-sm">
           {lines.map((line, i) => (
             <p key={i} className="leading-5 whitespace-pre-wrap">
               {line}
