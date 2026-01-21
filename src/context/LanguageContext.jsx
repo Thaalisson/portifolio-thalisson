@@ -46,12 +46,22 @@ export const LanguageProvider = ({ children }) => {
       about: {
         title: "Full Stack Developer",
         heading: "Crafting digital experiences with code",
+        highlights: [
+          "10+ years",
+          "CRM",
+          "Billing & Recovery",
+          ".NET",
+          "C#",
+          "React",
+          "Leadership",
+          "Cost Reduction",
+        ],
         paragraph1:
-          "Software Developer passionate about technology, with over 10 years of experience building and implementing robust CRM solutions, especially in telecom, finance, and cosmetics sectors. Specialist in billing and credit recovery systems, with a proven track record of strong results.",
+          "Software Developer with over 12 years of experience designing, building, and optimizing enterprise-grade CRM, billing, and credit recovery systems across telecom, finance, logistics, and cosmetics industries. Proven expertise in delivering scalable, high-performance solutions that drive measurable business results.",
         paragraph2:
-          "Proficient in Visual Basic 6, C#, SQL Server, ASP, JavaScript and React.js. Led tech teams, optimized systems by up to 40% and reduced operational costs by 20%. Also managed support teams, eliminating recurring issues in over 60% of cases.",
+          "Strong background in full-stack development, with deep knowledge of C#, .NET, SQL Server, ASP.NET, JavaScript, React.js, and modern frontend architectures. Demonstrated success in system optimization, achieving up to 40% reduction in operational costs and 30% acceleration in delivery pipelines through clean architecture, modular design, and performance-driven engineering practices.",
         paragraph3:
-          "Currently in Canada, seeking new challenges and immersion in a new culture, demonstrating quick adaptation, resilience, and continuous learning. Aims to expand technical repertoire and contribute globally with impactful solutions.",
+          "Experienced in technical leadership and cross-functional collaboration, having led development and support teams, streamlined workflows, and eliminated recurring production issues in over 60% of cases. Recognized for translating complex business requirements into maintainable, scalable technical solutions.\n\nCurrently based in Canada, highly adaptable, resilient, and motivated by continuous learning. Actively seeking new challenges to expand technical expertise, embrace new cultures, and contribute globally by building impactful, reliable, and user-centric software solutions.",
       },
       developer: {
         name: "Thalisson Pereira",
@@ -199,6 +209,16 @@ export const LanguageProvider = ({ children }) => {
       about: {
         title: "Full Stack Developer",
         heading: "Crafting digital experiences with code",
+        highlights: [
+          "10+ anos",
+          "CRM",
+          "Cobranca e Recuperacao",
+          ".NET",
+          "C#",
+          "React",
+          "Lideranca",
+          "Reducao de custos",
+        ],
         paragraph1:
           "Software Developer apaixonado por tecnologia, com mais de 10 anos de experiencia criando e implementando solucoes robustas para CRM, especialmente nos setores de telecomunicacoes, financeiro e cosmeticos. Especialista em sistemas de cobranca e recuperacao de credito, com historico comprovado de resultados expressivos.",
         paragraph2:

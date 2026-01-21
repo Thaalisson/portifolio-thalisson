@@ -112,6 +112,39 @@
     background-color: #fff;
   }
 
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 4px;
+    height: 2px;
+    background: hsl(var(--primary));
+    opacity: 0;
+    transform: scaleX(0.7);
+    transform-origin: left;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .light-mode .nav-link::after {
+    background: hsl(var(--primary));
+  }
+
+  .dark .nav-link::after {
+    background: hsl(0 0% 85%);
+  }
+
   .light-mode .contact-card {
     background-color: hsl(0 0% 92%);
     border-color: hsl(0 0% 82%);

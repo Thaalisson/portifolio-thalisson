@@ -49,30 +49,23 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative"
+      style={{
+        backgroundColor:
+          theme === "dark" ? "rgba(8, 12, 18, 0.65)" : "rgba(248, 250, 252, 0.7)",
+        backdropFilter: "none",
+        WebkitBackdropFilter: "none",
+        boxShadow: "none",
+        backgroundImage: "none",
+      }}
     >
-      <div
-        className={`absolute top-0 left-0 right-0 h-[3px] z-[60] ${
-          theme === "light" ? "bg-black" : "bg-white"
-        }`}
-        style={{
-          boxShadow:
-            theme === "light"
-              ? "0 0 12px rgba(0,0,0,0.35)"
-              : "0 0 12px rgba(255,255,255,0.6)",
-        }}
-      />
       <div className="flex items-center justify-between h-16 px-6 lg:px-8">
         <div className="shrink-0 mr-auto">
           <button
             onClick={() => scrollToSection("home")}
             className="text-sm font-semibold tracking-[0.2em] uppercase text-foreground hover:text-primary transition-colors"
           >
-            &lt;Portfolio /&gt;
+            TP-DEV
           </button>
         </div>
 
@@ -82,7 +75,7 @@ const Navbar = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
+                className={`nav-link px-4 py-2 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
                   activeSection === item.id
                     ? "text-primary bg-primary/10"
                     : "text-foreground/90 hover:text-primary hover:bg-primary/10"
@@ -93,7 +86,7 @@ const Navbar = () => {
             ))}
             <button
               onClick={() => scrollToSection("contact")}
-              className={`ml-4 px-6 py-2 rounded-lg text-sm font-semibold tracking-[0.08em] transition-all duration-300 ${
+              className={`nav-link ml-4 px-6 py-2 rounded-lg text-sm font-semibold tracking-[0.08em] transition-all duration-300 ${
                 activeSection === "contact"
                   ? "text-primary bg-primary/10"
                   : "text-foreground/90 hover:text-primary hover:bg-primary/10"
@@ -146,7 +139,7 @@ const Navbar = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
+                className={`nav-link block w-full text-left px-4 py-3 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
                   activeSection === item.id
                     ? "text-primary bg-primary/10"
                     : "text-foreground/90 hover:text-primary hover:bg-primary/10"

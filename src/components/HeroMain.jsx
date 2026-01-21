@@ -74,10 +74,6 @@ export default function HeroMain() {
             theme === "dark"
               ? "rgba(8, 12, 18, 0.65)"
               : "rgba(248, 250, 252, 0.7)",
-          backgroundImage:
-            theme === "dark"
-              ? "linear-gradient(120deg, rgba(10, 16, 24, 0.9), rgba(10, 16, 24, 0.55))"
-              : "linear-gradient(120deg, rgba(248, 250, 252, 0.9), rgba(248, 250, 252, 0.65))",
         }}
       />
 
