@@ -112,10 +112,7 @@ export default function CardSection() {
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border border-primary/20 bg-primary/10 text-primary mb-4">
             {language === "en" ? "Work" : "Trabalhos"}
           </span>
-          <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight mt-2"
-            style={{ color: "hsl(var(--foreground))" }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-2 text-primary">
             {t("projects.title")}
           </h2>
           <p className="text-muted-foreground text-base mt-3 max-w-2xl">

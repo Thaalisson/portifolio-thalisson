@@ -27,8 +27,7 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: -8 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.05 }}
-          className="text-4xl sm:text-5xl font-bold tracking-tight mb-5"
-          style={{ color: "hsl(var(--foreground))" }}
+          className="text-4xl sm:text-5xl font-bold tracking-tight mb-5 text-primary"
         >
           {t("contact.title")}
         </motion.h2>
