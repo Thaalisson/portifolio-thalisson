@@ -84,7 +84,7 @@ const skills = [
 ];
 
 export default function SkillsGridSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section
@@ -92,23 +92,26 @@ export default function SkillsGridSection() {
       id="skills"
     >
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          className="text-4xl font-bold mb-6 tracking-tight"
+        <motion.div
+          className="mb-12"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {t("skills.title")}
-        </motion.h2>
-
-        <motion.p
-          className="text-muted-foreground text-base max-w-3xl mb-12"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {t("skills.subtitle")}
-        </motion.p>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border border-primary/20 bg-primary/10 text-primary mb-4">
+            {language === "en" ? "Stack" : "Stack"}
+          </span>
+          <h2
+            className="text-3xl sm:text-4xl font-bold tracking-tight mt-2"
+            style={{ color: "hsl(var(--foreground))" }}
+          >
+            {t("skills.title")}
+          </h2>
+          <p className="text-muted-foreground text-base mt-3 max-w-3xl">
+            {t("skills.subtitle")}
+          </p>
+        </motion.div>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-10">
           {skills.map((skill, index) => (
@@ -117,12 +120,18 @@ export default function SkillsGridSection() {
               className="flex items-start gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.04 }}
             >
-              <skill.icon className="text-primary mt-1 flex-shrink-0" size={28} />
+              <skill.icon className="text-primary mt-1 flex-shrink-0" size={24} />
               <div>
-                <h3 className="text-lg font-bold">{skill.title}</h3>
-                <p className="text-base text-muted-foreground leading-snug">
+                <h3
+                  className="text-base font-bold mb-1"
+                  style={{ color: "hsl(var(--foreground))" }}
+                >
+                  {skill.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-snug">
                   {skill.description}
                 </p>
               </div>

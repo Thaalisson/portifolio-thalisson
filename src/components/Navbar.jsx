@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun, Globe } from "lucide-react";
+import { Menu, X, Moon, Sun, Globe, Download } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -12,8 +13,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      const sections = ["home", "about", "skills", "projects", "contact"];
+      setScrolled(window.scrollY > 20);
+      const sections = ["home", "about", "experience", "skills", "projects", "contact"];
       const current = sections.find((id) => {
         const el = document.getElementById(id);
         if (!el) return false;
@@ -28,129 +29,172 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false);
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "pt" : "en");
-  };
+  const toggleLanguage = () => setLanguage(language === "en" ? "pt" : "en");
 
   const navItems = [
     { id: "home", label: t("nav.home") },
     { id: "about", label: t("nav.about") },
+    { id: "experience", label: t("nav.experience") },
     { id: "skills", label: t("nav.skills") },
     { id: "projects", label: t("nav.projects") },
     { id: "contact", label: t("nav.contact") },
   ];
 
+  const bgColor =
+    theme === "dark" ? "rgba(8, 12, 18, 0.85)" : "rgba(248, 250, 252, 0.85)";
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 relative"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "border-b border-border/40" : "border-b border-transparent"
+      }`}
       style={{
-        backgroundColor:
-          theme === "dark" ? "rgba(8, 12, 18, 0.65)" : "rgba(248, 250, 252, 0.7)",
-        backdropFilter: "none",
-        WebkitBackdropFilter: "none",
-        boxShadow: "none",
-        backgroundImage: "none",
+        backgroundColor: scrolled ? bgColor : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
       }}
     >
-      <div className="flex items-center justify-between h-16 px-6 lg:px-8">
-        <div className="shrink-0 mr-auto">
-          <button
-            onClick={() => scrollToSection("home")}
-            className="text-sm font-semibold tracking-[0.2em] uppercase text-foreground hover:text-primary transition-colors"
-          >
-            TP-DEV
-          </button>
-        </div>
+      <div className="relative flex items-center h-16 px-6 lg:px-10 max-w-7xl mx-auto">
 
-        <div className="flex items-center space-x-8">
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.slice(0, -1).map((item) => (
+        {/* Logo — left anchor */}
+        <button
+          onClick={() => scrollToSection("home")}
+          className="text-sm font-bold tracking-[0.25em] uppercase text-foreground hover:text-primary transition-colors duration-200 shrink-0"
+        >
+          TP<span className="text-primary">.</span>DEV
+        </button>
+
+        {/* Desktop nav items — absolutely centered */}
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-1">
+          {navItems.map((item) => (
+            <div key={item.id} className="relative">
               <button
-                key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`nav-link px-4 py-2 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
+                className={`px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-200 ${
                   activeSection === item.id
-                    ? "text-primary bg-primary/10"
-                    : "text-foreground/90 hover:text-primary hover:bg-primary/10"
+                    ? "text-primary"
+                    : "text-foreground/60 hover:text-foreground"
                 }`}
               >
                 {item.label}
               </button>
-            ))}
-            <button
-              onClick={() => scrollToSection("contact")}
-              className={`nav-link ml-4 px-6 py-2 rounded-lg text-sm font-semibold tracking-[0.08em] transition-all duration-300 ${
-                activeSection === "contact"
-                  ? "text-primary bg-primary/10"
-                  : "text-foreground/90 hover:text-primary hover:bg-primary/10"
-              }`}
-            >
-              {t("nav.contact")}
-            </button>
-          </div>
+              {activeSection === item.id && (
+                <motion.div
+                  layoutId="navUnderline"
+                  className="absolute bottom-0 left-2 right-2 h-[2px] bg-primary rounded-full"
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
 
-          <div className="hidden md:flex items-center gap-2 border-l border-border pl-4">
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Desktop right controls */}
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href="/Thalisson_Pereira_Resume_2026.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold bg-primary text-background hover:bg-primary/85 transition-all duration-200"
+          >
+            <Download size={13} />
+            {language === "en" ? "Resume" : "Currículo"}
+          </a>
+          <div className="flex items-center gap-0.5 pl-3 border-l border-border/60">
             <button
               onClick={cycleTheme}
-              className="p-2 rounded-lg text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300"
+              className="p-2 rounded-lg text-foreground/60 hover:text-primary hover:bg-primary/8 transition-all duration-200"
               title={theme === "light" ? "Dark mode" : "Light mode"}
             >
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
             </button>
             <button
               onClick={toggleLanguage}
-              className="p-2 rounded-lg text-foreground hover:text-primary text-xs font-semibold tracking-[0.2em] flex items-center gap-1 transition-all duration-300"
-              title="Change language"
+              className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold text-foreground/60 hover:text-primary transition-colors duration-200"
             >
-              <Globe size={16} />
+              <Globe size={14} />
               {language.toUpperCase()}
             </button>
           </div>
+        </div>
 
-          <div className="md:hidden flex items-center gap-2">
-            <button onClick={cycleTheme}>
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
-            <button onClick={toggleLanguage} className="text-xs font-semibold tracking-[0.2em]">
-              {language.toUpperCase()}
-            </button>
-            <button onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+        {/* Mobile controls */}
+        <div className="md:hidden flex items-center gap-2 ml-auto">
+          <button
+            onClick={cycleTheme}
+            className="p-1.5 text-foreground/60 hover:text-primary transition-colors"
+          >
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          <button
+            onClick={toggleLanguage}
+            className="text-xs font-semibold tracking-widest text-foreground/60 hover:text-primary transition-colors"
+          >
+            {language.toUpperCase()}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-1.5 text-foreground/60 hover:text-primary transition-colors"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
 
-      <div
-        className={`md:hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
-        }`}
-      >
-        <div className="bg-background border-t border-border px-6 py-4">
-          <div className="space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`nav-link block w-full text-left px-4 py-3 rounded-lg text-sm font-medium tracking-[0.08em] transition-all duration-300 ${
-                  activeSection === item.id
-                    ? "text-primary bg-primary/10"
-                    : "text-foreground/90 hover:text-primary hover:bg-primary/10"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18 }}
+            className="md:hidden border-t border-border/40"
+            style={{
+              backgroundColor: bgColor,
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+            }}
+          >
+            <div className="px-5 py-4 space-y-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    activeSection === item.id
+                      ? "text-primary bg-primary/10"
+                      : "text-foreground/70 hover:text-foreground hover:bg-primary/5"
+                  }`}
+                >
+                  {activeSection === item.id && (
+                    <span className="w-1 h-1 rounded-full bg-primary mr-2 shrink-0" />
+                  )}
+                  {item.label}
+                </button>
+              ))}
+              <div className="pt-3 border-t border-border/40">
+                <a
+                  href="/Thalisson_Pereira_Resume_2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg text-sm font-semibold bg-primary text-background hover:bg-primary/85 transition-all duration-200"
+                >
+                  <Download size={14} />
+                  {language === "en" ? "Download Resume" : "Baixar Currículo"}
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

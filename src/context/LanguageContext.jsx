@@ -27,6 +27,7 @@ export const LanguageProvider = ({ children }) => {
       nav: {
         home: "Home",
         about: "About",
+        experience: "Experience",
         skills: "Skills",
         projects: "Projects",
         contact: "Contact",
@@ -40,8 +41,10 @@ export const LanguageProvider = ({ children }) => {
         getInTouch: "Get In Touch",
       },
       heroText: {
-        fullText: "I'm Thalisson Pereira",
-        roles: ["Software Developer", "Fullstack Engineer", "Web Design", ".NET & React.js"],
+        fullText: "Thalisson Pereira",
+        roles: ["Senior .NET Developer", "Backend Engineer", "Tech Lead", ".NET & React.js"],
+        valueProps: "13+ years building enterprise .NET systems · Canada & Brazil",
+        cta: { work: "View My Work", resume: "Resume" },
       },
       about: {
         title: "Full Stack Developer",
@@ -78,16 +81,21 @@ export const LanguageProvider = ({ children }) => {
           pt: "Ola, Mundo!",
         },
       },
+      experience: {
+        eyebrow: "Career",
+        title: "Work Experience",
+        subtitle: "13+ years delivering enterprise systems in Brazil and Canada — from telecom CRM to SaaS platforms.",
+      },
       skills: {
         title: "Technical Skills",
-        subtitle: "A comprehensive toolkit for building modern web applications",
+        subtitle: "Built for enterprise scale — from .NET APIs to React frontends, backed by 13+ years in production systems.",
         frontend: "Frontend",
         backend: "Backend",
         devtools: "DevOps & Tools",
       },
       projects: {
         title: "Featured Projects",
-        subtitle: "A selection of my recent work showcasing full-stack development capabilities",
+        subtitle: "Enterprise systems and products that drove measurable business impact — from telecom CRM to active SaaS platforms.",
         viewAll: "View All Projects",
       },
       study: {
@@ -167,7 +175,7 @@ export const LanguageProvider = ({ children }) => {
       footer: {
         connect: "Let's Connect",
         follow: "Follow me on social media for updates on my latest projects and tech insights.",
-        copyright: "(c) 2024 Full Stack Developer. Built with React & Tailwind CSS.",
+        copyright: `© ${new Date().getFullYear()} Thalisson Pereira. Built with React & Tailwind CSS.`,
       },
       contact: {
         title: "Let's build something solid",
@@ -176,13 +184,16 @@ export const LanguageProvider = ({ children }) => {
         emailLabel: "Email",
         emailValue: "thalisson_21@icloud.com",
         locationLabel: "Location",
-        locationValue: "Toronto, Ontario, Canada",
+        locationValue: "London, Ontario, Canada",
         form: {
           name: "Your name",
           email: "Your email",
           message: "Project details",
           button: "Send message",
+          sending: "Sending...",
           success: "Thanks! I'll get back to you shortly.",
+          sendAnother: "Send another message",
+          error: "Something went wrong. Try emailing me directly.",
         },
       },
     },
@@ -190,6 +201,7 @@ export const LanguageProvider = ({ children }) => {
       nav: {
         home: "Inicio",
         about: "Sobre",
+        experience: "Experiencia",
         skills: "Habilidades",
         projects: "Projetos",
         contact: "Contato",
@@ -203,8 +215,10 @@ export const LanguageProvider = ({ children }) => {
         getInTouch: "Entre em Contato",
       },
       heroText: {
-        fullText: "Eu sou o Thalisson Pereira",
-        roles: ["Desenvolvedor de Software", "Engenheiro Fullstack", "Design Web", ".NET & React.js"],
+        fullText: "Thalisson Pereira",
+        roles: ["Desenvolvedor Sênior .NET", "Engenheiro Backend", "Tech Lead", ".NET & React.js"],
+        valueProps: "13+ anos desenvolvendo sistemas .NET enterprise · Canadá & Brasil",
+        cta: { work: "Ver Meu Trabalho", resume: "Currículo" },
       },
       about: {
         title: "Full Stack Developer",
@@ -241,16 +255,21 @@ export const LanguageProvider = ({ children }) => {
           pt: "Ola, Mundo!",
         },
       },
+      experience: {
+        eyebrow: "Carreira",
+        title: "Experiência Profissional",
+        subtitle: "13+ anos entregando sistemas enterprise no Brasil e no Canadá — de CRM de telecom a plataformas SaaS.",
+      },
       skills: {
         title: "Habilidades Tecnicas",
-        subtitle: "Um kit abrangente para construir aplicacoes web modernas",
+        subtitle: "Construido para escala enterprise — de APIs .NET a frontends React, com 13+ anos em sistemas de producao.",
         frontend: "Frontend",
         backend: "Backend",
         devtools: "DevOps & Ferramentas",
       },
       projects: {
         title: "Projetos em Destaque",
-        subtitle: "Uma selecao dos meus trabalhos recentes mostrando capacidades de desenvolvimento full-stack",
+        subtitle: "Sistemas enterprise e produtos que geraram impacto mensuravel — de CRM de telecom a plataformas SaaS ativas.",
         viewAll: "Ver Todos os Projetos",
       },
       study: {
@@ -337,7 +356,7 @@ export const LanguageProvider = ({ children }) => {
         connect: "Vamos nos Conectar",
         follow:
           "Me siga nas redes sociais para atualizacoes sobre meus projetos mais recentes e insights de tecnologia.",
-        copyright: "(c) 2024 Full Stack Developer. Construido com React & Tailwind CSS.",
+        copyright: `© ${new Date().getFullYear()} Thalisson Pereira. Construido com React & Tailwind CSS.`,
       },
       contact: {
         title: "Vamos construir algo solido",
@@ -346,13 +365,16 @@ export const LanguageProvider = ({ children }) => {
         emailLabel: "Email",
         emailValue: "thalisson_21@icloud.com",
         locationLabel: "Localizacao",
-        locationValue: "Toronto, Ontario, Canada",
+        locationValue: "London, Ontario, Canada",
         form: {
           name: "Seu nome",
           email: "Seu email",
           message: "Detalhes do projeto",
           button: "Enviar mensagem",
+          sending: "Enviando...",
           success: "Obrigado! Retorno em breve.",
+          sendAnother: "Enviar outra mensagem",
+          error: "Algo deu errado. Tente me enviar um email diretamente.",
         },
       },
     },

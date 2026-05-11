@@ -4,6 +4,7 @@ import WelcomeBoot from "./components/WelcomeBoot";
 import HeroMain from "./components/HeroMain";
 import CardSection from "./components/CardSection";
 import ExperienceSection from "./components/ExperienceSection";
+import ExperienceTimeline from "./components/ExperienceTimeline";
 import SocialSidebar from "./components/SocialSidebar";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
@@ -27,8 +28,9 @@ export default function App() {
             <SocialSidebar />
             <HeroMain key="hero" />
             <About />
-            <CardSection />
+            <ExperienceTimeline />
             <ExperienceSection />
+            <CardSection />
             <BlogSection />
             <ContactSection />
           </>
