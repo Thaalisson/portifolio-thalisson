@@ -64,10 +64,7 @@ export default function Blog() {
                 </div>
               </div>
 
-              <h3
-                className="text-base font-bold mb-1"
-                style={{ color: "hsl(var(--foreground))" }}
-              >
+              <h3 className="text-base font-bold mb-1 text-primary">
                 {topic.title}
               </h3>
               <p className="text-sm text-muted-foreground mb-4">{topic.subtitle}</p>

@@ -155,10 +155,7 @@ export default function CardSection() {
                   )}
                 </div>
 
-                <h3
-                  className="text-base font-bold mb-0.5"
-                  style={{ color: "hsl(var(--foreground))" }}
-                >
+                <h3 className="text-base font-bold mb-0.5 text-primary">
                   {title}
                 </h3>
                 <p className="text-xs text-muted-foreground mb-2">{project.company}</p>

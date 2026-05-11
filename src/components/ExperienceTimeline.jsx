@@ -5,7 +5,7 @@ import { useLanguage } from "../context/LanguageContext";
 const jobs = [
   {
     id: 1,
-    company: "Opid Technologie",
+    company: "Opid Technologies",
     role: { en: "Software Developer", pt: "Desenvolvedor de Software" },
     period: { en: "May 2022 – Present · 4 years", pt: "Mai 2022 – Presente · 4 anos" },
     location: "London, ON, Canada 🇨🇦",
@@ -78,10 +78,7 @@ export default function ExperienceTimeline() {
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-[0.2em] uppercase border border-primary/20 bg-primary/10 text-primary mb-4">
             {t("experience.eyebrow")}
           </span>
-          <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight mt-2"
-            style={{ color: "hsl(var(--foreground))" }}
-          >
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mt-2 text-primary">
             {t("experience.title")}
           </h2>
           <p className="text-muted-foreground text-base mt-3 max-w-2xl">{t("experience.subtitle")}</p>
@@ -115,10 +112,7 @@ export default function ExperienceTimeline() {
                 <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                   <div>
                     <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <h3
-                        className="text-lg font-bold"
-                        style={{ color: "hsl(var(--foreground))" }}
-                      >
+                      <h3 className="text-lg font-bold text-primary">
                         {job.company}
                       </h3>
                       {job.isCurrent && (
