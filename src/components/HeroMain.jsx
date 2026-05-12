@@ -202,9 +202,9 @@ export default function HeroMain() {
           </div>
           <div className="w-px h-7 bg-foreground/15" />
           <div>
-            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>5+</div>
+            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>4</div>
             <div className="text-[11px] text-foreground/40 tracking-wide mt-0.5">
-              {language === "en" ? "Industries" : "Indústrias"}
+              {language === "en" ? "Devs led" : "Devs liderados"}
             </div>
           </div>
         </motion.div>

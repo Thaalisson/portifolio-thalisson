@@ -64,7 +64,7 @@ export const LanguageProvider = ({ children }) => {
         paragraph2:
           "Strong background in full-stack development, with deep knowledge of C#, .NET, SQL Server, ASP.NET, JavaScript, React.js, and modern frontend architectures. Demonstrated success in system optimization, achieving up to 40% reduction in operational costs and 30% acceleration in delivery pipelines through clean architecture, modular design, and performance-driven engineering practices.",
         paragraph3:
-          "Experienced in technical leadership and cross-functional collaboration, having led development and support teams, streamlined workflows, and eliminated recurring production issues in over 60% of cases. Recognized for translating complex business requirements into maintainable, scalable technical solutions.\n\nCurrently based in Canada, highly adaptable, resilient, and motivated by continuous learning. Actively seeking new challenges to expand technical expertise, embrace new cultures, and contribute globally by building impactful, reliable, and user-centric software solutions.",
+          "Led a 4-person production support team — defined SLAs, classified incident criticality, assigned tasks by developer expertise, and ran direct client meetings during critical outages. Eliminated over 60% of recurring production issues through root-cause analysis and systematic fixes.\n\nCurrently based in Canada, highly adaptable, and motivated by continuous learning. Actively seeking senior or tech lead roles where I can combine deep .NET expertise with hands-on team leadership.",
       },
       developer: {
         name: "Thalisson Pereira",
@@ -107,67 +107,61 @@ export const LanguageProvider = ({ children }) => {
           {
             id: "clean-architecture",
             title: "Clean Architecture",
-            subtitle: "Layer separation and framework independence",
-            applied: "Applied to isolate the core domain in a billing platform while keeping API and database as replaceable details.",
+            subtitle: "Domain isolation across layers",
+            applied: "Isolated billing domain from the API and SQL Server in a CRM platform — infrastructure is swappable without touching a single business rule.",
             example: {
-              label: "Use case boundary",
-              code:
-                "public class CreateInvoice {\n  private readonly IInvoiceRepo _repo;\n  public CreateInvoice(IInvoiceRepo repo) { _repo = repo; }\n  public void Execute(NewInvoice cmd) {\n    var invoice = Invoice.Create(cmd);\n    _repo.Save(invoice);\n  }\n}",
+              label: "Layer boundary",
+              code: "// Domain — zero framework deps\npublic class Invoice {\n  public InvoiceId Id { get; }\n  public Money Total { get; private set; }\n  public void ApplyDiscount(Percent p) =>\n    Total = Total.Reduce(p);\n}\n\n// Use case — orchestrates only\npublic class ApproveInvoice(IInvoiceRepo repo) {\n  public async Task Execute(Guid id) {\n    var inv = await repo.GetAsync(id);\n    inv.Approve();\n    await repo.SaveAsync(inv);\n  }\n}",
             },
           },
           {
-            id: "dependency-injection",
-            title: "Dependency Injection",
-            subtitle: "Dependency control for safe evolution",
-            applied: "Applied to swap gateways (email, SMS, WhatsApp) without changing business rules.",
+            id: "multi-tenant",
+            title: "Multi-Tenant SaaS",
+            subtitle: "Shared infrastructure, isolated data per client",
+            applied: "Built tenant isolation at Opid Technologies using EF Core global query filters — every query is automatically scoped to the current tenant with zero boilerplate in business code.",
             example: {
-              label: "Constructor injection",
-              code:
-                "public class NotifyUser {\n  private readonly INotifier _notifier;\n  public NotifyUser(INotifier notifier) { _notifier = notifier; }\n  public Task Execute(User u) => _notifier.Send(u);\n}",
+              label: "Tenant middleware + EF Core filter",
+              code: "public class TenantMiddleware(ITenantResolver resolver) {\n  public async Task InvokeAsync(\n      HttpContext ctx, RequestDelegate next) {\n    TenantContext.Current =\n      await resolver.ResolveAsync(ctx);\n    await next(ctx);\n  }\n}\n\n// Auto-filters every query — no manual WHERE\nprotected override void OnModelCreating(ModelBuilder mb) {\n  mb.Entity<Invoice>()\n    .HasQueryFilter(x => x.TenantId == _tenant.Id);\n}",
             },
           },
           {
-            id: "ddd",
-            title: "DDD (Domain-Driven Design)",
-            subtitle: "Domain-focused modeling",
-            applied: "Applied to keep the language aligned between tech and business in CRM and recovery flows.",
+            id: "cqrs",
+            title: "CQRS + MediatR",
+            subtitle: "Separate write and read flows for scale",
+            applied: "Decoupled billing commands from reporting queries at MFMti — commands write to SQL Server while projections feed a fast read model, reducing DB contention by 30%.",
             example: {
-              label: "Aggregate root",
-              code:
-                "public class Agreement {\n  public AgreementId Id { get; }\n  public Money Balance { get; private set; }\n  public void ApplyPayment(Money value) {\n    Balance = Balance.Subtract(value);\n  }\n}",
+              label: "Command → Handler → Event",
+              code: "public record CreateInvoiceCommand(\n  Guid TenantId, decimal Amount) : IRequest<InvoiceId>;\n\npublic class CreateInvoiceHandler(\n  IInvoiceRepo repo, IEventBus bus)\n  : IRequestHandler<CreateInvoiceCommand, InvoiceId> {\n  public async Task<InvoiceId> Handle(\n      CreateInvoiceCommand cmd, CancellationToken ct) {\n    var inv = Invoice.Create(cmd.TenantId, cmd.Amount);\n    await repo.SaveAsync(inv, ct);\n    await bus.PublishAsync(new InvoiceCreated(inv.Id), ct);\n    return inv.Id;\n  }\n}",
             },
           },
           {
             id: "dotnet",
-            title: ".NET",
-            subtitle: "Robust APIs, performance, and scalability",
-            applied: "Applied to build secure APIs with validation and clear contracts for internal services.",
+            title: ".NET / Minimal API",
+            subtitle: "Validation pipeline, middleware, background services",
+            applied: "Built internal APIs at Opid with FluentValidation pipeline and structured error responses — zero unhandled exceptions in production for 18+ months.",
             example: {
-              label: "Minimal API",
-              code:
-                "app.MapPost(\"/invoices\", async (CreateInvoiceRequest req, IInvoiceService svc) => {\n  var id = await svc.Create(req);\n  return Results.Created($\"/invoices/{id}\", id);\n});",
+              label: "Validation pipeline",
+              code: "app.MapPost(\"/invoices\", async (\n    CreateInvoiceRequest req,\n    IValidator<CreateInvoiceRequest> v,\n    IInvoiceService svc) => {\n  var result = await v.ValidateAsync(req);\n  if (!result.IsValid)\n    return Results.ValidationProblem(\n      result.ToDictionary());\n  var id = await svc.CreateAsync(req);\n  return Results.Created($\"/invoices/{id}\", new { id });\n});",
             },
           },
           {
             id: "react",
             title: "React",
-            subtitle: "Reactive interfaces and user experience",
-            applied: "Applied to build dashboards with live filters and fast feedback for operators.",
+            subtitle: "Optimistic UI, virtualization, real-time dashboards",
+            applied: "Built operator dashboards at Opid with optimistic updates and virtualized lists handling 10k+ rows — perceived latency dropped to near zero.",
             example: {
-              label: "State + memo",
-              code:
-                "const [query, setQuery] = useState(\"\");\nconst filtered = useMemo(\n  () => data.filter(x => x.name.includes(query)),\n  [data, query]\n);",
+              label: "Optimistic update pattern",
+              code: "const { mutate } = useMutation(approveInvoice, {\n  onMutate: async (id) => {\n    await queryClient.cancelQueries(['invoices']);\n    const prev = queryClient.getQueryData(['invoices']);\n    queryClient.setQueryData(['invoices'], old =>\n      old.map(x =>\n        x.id === id ? { ...x, status: 'approved' } : x\n      ));\n    return { prev };\n  },\n  onError: (_, __, ctx) =>\n    queryClient.setQueryData(['invoices'], ctx.prev),\n});",
             },
           },
           {
             id: "sql",
-            title: "SQL",
-            subtitle: "Well-modeled data and efficient queries",
-            applied: "Applied to optimize reports using indexes and query plans for large datasets.",
+            title: "SQL / T-SQL",
+            subtitle: "Window functions, indexes, execution plans",
+            applied: "Rewrote CRM recovery reports at MFMti using window functions and covering indexes — query time dropped from 14s to 800ms on 5M-row tables.",
             example: {
-              label: "Report query",
-              code:
-                "SELECT c.Name, SUM(p.Amount) AS Total\nFROM Payments p\nJOIN Customers c ON c.Id = p.CustomerId\nWHERE p.CreatedAt >= @Start\nGROUP BY c.Name\nORDER BY Total DESC;",
+              label: "Window function + CTE",
+              code: "WITH RankedPayments AS (\n  SELECT\n    c.Name, p.Amount, p.CreatedAt,\n    ROW_NUMBER() OVER (\n      PARTITION BY p.CustomerId\n      ORDER BY p.CreatedAt DESC\n    ) AS rn\n  FROM Payments p\n  JOIN Customers c ON c.Id = p.CustomerId\n)\nSELECT Name, Amount, CreatedAt\nFROM RankedPayments\nWHERE rn = 1;",
             },
           },
         ],
@@ -238,7 +232,7 @@ export const LanguageProvider = ({ children }) => {
         paragraph2:
           "Domina linguagens como Visual Basic 6, C#, SQL Server, ASP, JavaScript e React.js. Atuou liderando equipes tecnicas, otimizando sistemas em ate 40% e reduzindo custos operacionais em 20%. Tambem gerenciou times de suporte, eliminando problemas recorrentes em mais de 60% dos casos.",
         paragraph3:
-          "Atualmente no Canada, em busca de novos desafios e imersao em uma nova cultura, demonstrando rapida adaptacao, resiliencia e vontade constante de aprender. Tem como objetivo expandir ainda mais seu repertorio tecnico e contribuir globalmente com solucoes de alto impacto.",
+          "Liderou equipe de 4 pessoas de suporte a producao — definiu SLAs, classificou criticidade de incidentes, delegou tarefas por expertise e conduziu reunioes diretas com clientes durante indisponibilidades criticas. Eliminou mais de 60% dos problemas recorrentes em producao atraves de analise de causa raiz.\n\nAtualmente no Canada, em busca de vagas senior ou tech lead onde possa combinar profundo conhecimento em .NET com lideranca tecnica de equipes.",
       },
       developer: {
         name: "Thalisson Pereira",
@@ -281,73 +275,61 @@ export const LanguageProvider = ({ children }) => {
           {
             id: "clean-architecture",
             title: "Clean Architecture",
-            subtitle: "Separacao de camadas e independencia de frameworks",
-            applied:
-              "Aplicado para isolar o dominio central em uma plataforma de cobranca mantendo API e banco como detalhes substituiveis.",
+            subtitle: "Isolamento de dominio entre camadas",
+            applied: "Isolei o dominio de cobranca da API e do SQL Server em uma plataforma CRM — a infraestrutura e substituivel sem tocar em nenhuma regra de negocio.",
             example: {
-              label: "Limite do caso de uso",
-              code:
-                "public class CreateInvoice {\n  private readonly IInvoiceRepo _repo;\n  public CreateInvoice(IInvoiceRepo repo) { _repo = repo; }\n  public void Execute(NewInvoice cmd) {\n    var invoice = Invoice.Create(cmd);\n    _repo.Save(invoice);\n  }\n}",
+              label: "Limite de camada",
+              code: "// Dominio — sem dependencias de framework\npublic class Invoice {\n  public InvoiceId Id { get; }\n  public Money Total { get; private set; }\n  public void ApplyDiscount(Percent p) =>\n    Total = Total.Reduce(p);\n}\n\n// Caso de uso — so orquestra\npublic class ApproveInvoice(IInvoiceRepo repo) {\n  public async Task Execute(Guid id) {\n    var inv = await repo.GetAsync(id);\n    inv.Approve();\n    await repo.SaveAsync(inv);\n  }\n}",
             },
           },
           {
-            id: "dependency-injection",
-            title: "Dependency Injection",
-            subtitle: "Controle de dependencias para evolucao segura",
-            applied:
-              "Aplicado para trocar gateways (email, SMS, WhatsApp) sem alterar regras de negocio.",
+            id: "multi-tenant",
+            title: "Multi-Tenant SaaS",
+            subtitle: "Infraestrutura compartilhada, dados isolados por cliente",
+            applied: "Construi isolamento de tenant na Opid Technologies usando global query filters do EF Core — toda query e automaticamente escopada ao tenant atual sem boilerplate no codigo de negocio.",
             example: {
-              label: "Injecao por construtor",
-              code:
-                "public class NotifyUser {\n  private readonly INotifier _notifier;\n  public NotifyUser(INotifier notifier) { _notifier = notifier; }\n  public Task Execute(User u) => _notifier.Send(u);\n}",
+              label: "Middleware de tenant + filtro EF Core",
+              code: "public class TenantMiddleware(ITenantResolver resolver) {\n  public async Task InvokeAsync(\n      HttpContext ctx, RequestDelegate next) {\n    TenantContext.Current =\n      await resolver.ResolveAsync(ctx);\n    await next(ctx);\n  }\n}\n\n// Filtra automaticamente toda query\nprotected override void OnModelCreating(ModelBuilder mb) {\n  mb.Entity<Invoice>()\n    .HasQueryFilter(x => x.TenantId == _tenant.Id);\n}",
             },
           },
           {
-            id: "ddd",
-            title: "DDD (Domain-Driven Design)",
-            subtitle: "Modelagem orientada ao dominio",
-            applied:
-              "Aplicado para alinhar linguagem entre negocio e tecnologia em fluxos de CRM e recuperacao.",
+            id: "cqrs",
+            title: "CQRS + MediatR",
+            subtitle: "Separacao de fluxos de escrita e leitura para escala",
+            applied: "Desacopiei comandos de cobranca das queries de relatorio na MFMti — comandos escrevem no SQL Server enquanto projecoes alimentam um modelo de leitura rapido, reduzindo contencao em 30%.",
             example: {
-              label: "Aggregate root",
-              code:
-                "public class Agreement {\n  public AgreementId Id { get; }\n  public Money Balance { get; private set; }\n  public void ApplyPayment(Money value) {\n    Balance = Balance.Subtract(value);\n  }\n}",
+              label: "Command → Handler → Event",
+              code: "public record CreateInvoiceCommand(\n  Guid TenantId, decimal Amount) : IRequest<InvoiceId>;\n\npublic class CreateInvoiceHandler(\n  IInvoiceRepo repo, IEventBus bus)\n  : IRequestHandler<CreateInvoiceCommand, InvoiceId> {\n  public async Task<InvoiceId> Handle(\n      CreateInvoiceCommand cmd, CancellationToken ct) {\n    var inv = Invoice.Create(cmd.TenantId, cmd.Amount);\n    await repo.SaveAsync(inv, ct);\n    await bus.PublishAsync(new InvoiceCreated(inv.Id), ct);\n    return inv.Id;\n  }\n}",
             },
           },
           {
             id: "dotnet",
-            title: ".NET",
-            subtitle: "APIs robustas, performance e escalabilidade",
-            applied:
-              "Aplicado para criar APIs seguras com validacao e contratos claros para servicos internos.",
+            title: ".NET / Minimal API",
+            subtitle: "Pipeline de validacao, middleware, background services",
+            applied: "Construi APIs internas na Opid com pipeline FluentValidation e respostas de erro estruturadas — zero excecoes nao tratadas em producao por 18+ meses.",
             example: {
-              label: "Minimal API",
-              code:
-                "app.MapPost(\"/invoices\", async (CreateInvoiceRequest req, IInvoiceService svc) => {\n  var id = await svc.Create(req);\n  return Results.Created($\"/invoices/{id}\", id);\n});",
+              label: "Pipeline de validacao",
+              code: "app.MapPost(\"/invoices\", async (\n    CreateInvoiceRequest req,\n    IValidator<CreateInvoiceRequest> v,\n    IInvoiceService svc) => {\n  var result = await v.ValidateAsync(req);\n  if (!result.IsValid)\n    return Results.ValidationProblem(\n      result.ToDictionary());\n  var id = await svc.CreateAsync(req);\n  return Results.Created($\"/invoices/{id}\", new { id });\n});",
             },
           },
           {
             id: "react",
             title: "React",
-            subtitle: "Interfaces reativas e experiencia do usuario",
-            applied:
-              "Aplicado para construir dashboards com filtros ao vivo e feedback rapido.",
+            subtitle: "UI otimista, virtualizacao, dashboards em tempo real",
+            applied: "Construi dashboards de operadores na Opid com updates otimistas e listas virtualizadas com 10k+ linhas — latencia percebida caiu para quase zero.",
             example: {
-              label: "Estado + memo",
-              code:
-                "const [query, setQuery] = useState(\"\");\nconst filtered = useMemo(\n  () => data.filter(x => x.name.includes(query)),\n  [data, query]\n);",
+              label: "Padrao de update otimista",
+              code: "const { mutate } = useMutation(approveInvoice, {\n  onMutate: async (id) => {\n    await queryClient.cancelQueries(['invoices']);\n    const prev = queryClient.getQueryData(['invoices']);\n    queryClient.setQueryData(['invoices'], old =>\n      old.map(x =>\n        x.id === id ? { ...x, status: 'approved' } : x\n      ));\n    return { prev };\n  },\n  onError: (_, __, ctx) =>\n    queryClient.setQueryData(['invoices'], ctx.prev),\n});",
             },
           },
           {
             id: "sql",
-            title: "SQL",
-            subtitle: "Dados bem modelados e consultas eficientes",
-            applied:
-              "Aplicado para otimizar relatorios com indices e planos de execucao.",
+            title: "SQL / T-SQL",
+            subtitle: "Window functions, indices, planos de execucao",
+            applied: "Reescrevi relatorios de recuperacao de CRM na MFMti com window functions e indices cobertos — tempo de query caiu de 14s para 800ms em tabelas com 5M de linhas.",
             example: {
-              label: "Query de relatorio",
-              code:
-                "SELECT c.Name, SUM(p.Amount) AS Total\nFROM Payments p\nJOIN Customers c ON c.Id = p.CustomerId\nWHERE p.CreatedAt >= @Start\nGROUP BY c.Name\nORDER BY Total DESC;",
+              label: "Window function + CTE",
+              code: "WITH RankedPayments AS (\n  SELECT\n    c.Name, p.Amount, p.CreatedAt,\n    ROW_NUMBER() OVER (\n      PARTITION BY p.CustomerId\n      ORDER BY p.CreatedAt DESC\n    ) AS rn\n  FROM Payments p\n  JOIN Customers c ON c.Id = p.CustomerId\n)\nSELECT Name, Amount, CreatedAt\nFROM RankedPayments\nWHERE rn = 1;",
             },
           },
         ],

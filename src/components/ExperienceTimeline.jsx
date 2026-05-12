@@ -39,20 +39,20 @@ const jobs = [
     clients: ["Claro", "Boticário", "Jequiti", "PAN Bank"],
     achievements: {
       en: [
+        "Led 4-person production support team — defined SLAs, triaged critical incidents by severity, assigned tasks by developer expertise, and ran client-facing meetings on issue criticality",
         "CRM System (Claro): Increased credit recovery rate by 65% — C#, SQL Server, ASP.NET",
         "Billing Platform (Jequiti): Improved billing efficiency by 34% — ASP.NET MVC, REST APIs",
         "Scheduling System (TFT Global): Improved workforce efficiency by 40% through backend services",
         "Migrated legacy VB6/ASP systems to .NET Core, reducing downtime by 20%",
         "Optimized complex SQL queries and stored procedures, improving database performance by 30%",
-        "Built RESTful APIs and Web Services, reducing integration response times by 20%",
       ],
       pt: [
+        "Liderou equipe de 4 pessoas de suporte a produção — definiu SLAs, triou incidentes críticos por severidade, delegou tarefas por expertise e conduziu reuniões com clientes sobre criticidade",
         "Sistema CRM (Claro): Aumentou taxa de recuperação de crédito em 65% — C#, SQL Server, ASP.NET",
         "Plataforma de Cobrança (Jequiti): Melhorou eficiência em 34% — ASP.NET MVC, REST APIs",
         "Sistema de Agendamento (TFT Global): Melhorou eficiência operacional em 40%",
         "Migrou sistemas legados VB6/ASP para .NET Core, reduzindo downtime em 20%",
         "Otimizou queries SQL complexas e stored procedures, melhorando performance em 30%",
-        "Construiu APIs RESTful e Web Services, reduzindo tempos de resposta em 20%",
       ],
     },
     tech: ["C#", ".NET", "ASP.NET MVC", "SQL Server", "VB6", "REST APIs"],
