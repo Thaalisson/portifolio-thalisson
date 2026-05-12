@@ -10,6 +10,8 @@ import {
   Layers,
   ClipboardList,
   UserCheck,
+  Cloud,
+  FlaskConical,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
@@ -74,6 +76,18 @@ const skills = [
     title: "Domain Knowledge / CRM",
     description:
       "Billing, Scheduling, Credit Recovery, JSON orchestration, AppBundle engine, white-label arch",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    description:
+      "AWS (EC2, S3, Elastic Beanstalk), Docker, GitHub Actions, CI/CD pipelines, environment config",
+  },
+  {
+    icon: FlaskConical,
+    title: "Testing",
+    description:
+      "xUnit, NUnit, Integration Testing, Unit Testing, JWT / OAuth2 auth flows, Postman collections",
   },
   {
     icon: UserCheck,

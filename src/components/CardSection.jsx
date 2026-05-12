@@ -14,7 +14,7 @@ const projects = [
   {
     id: "nocode",
     title: { en: "No-Code UI Builder Platform", pt: "Plataforma No-Code UI Builder" },
-    company: "Opid Technologie",
+    company: "Opid Technologies",
     icon: FaCubes,
     metric: "↓ 50% layout time · ↓ 35% rework",
     description: {
@@ -31,10 +31,10 @@ const projects = [
     icon: FaUsers,
     metric: "↑ 65% recovery rate",
     description: {
-      en: "Enterprise CRM for credit recovery in the telecom industry. Billing, scheduling, and recovery flows across high-volume data pipelines for one of Brazil's largest carriers.",
-      pt: "CRM enterprise para recuperação de crédito no setor de telecom. Fluxos de cobrança, agendamento e recuperação em pipelines de alto volume para uma das maiores operadoras do Brasil.",
+      en: "Enterprise CRM for credit recovery at Claro (América Móvil) — one of Latin America's largest carriers. CNAB billing integrations, scheduling flows, and recovery pipelines processing millions of records. Delivered in 3 months.",
+      pt: "CRM enterprise para recuperação de crédito na Claro (América Móvil) — uma das maiores operadoras da América Latina. Integrações de cobrança CNAB, fluxos de agendamento e pipelines de recuperação processando milhões de registros. Entregue em 3 meses.",
     },
-    tech: ["C#", "ASP.NET", "SQL Server", "VBScript"],
+    tech: ["C#", "ASP.NET", "SQL Server", "CNAB", "VBScript"],
     type: "enterprise",
   },
   {

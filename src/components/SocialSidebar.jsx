@@ -27,7 +27,7 @@ const SocialSidebar = () => {
           <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter">
             <Twitter className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
           </a>
-          <a href="https://linkedin.com/in/thalisson" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://linkedin.com/in/thalissonpereira01" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
           </a>
           <a href="#" target="_blank" rel="noreferrer" aria-label="Portfolio Code">

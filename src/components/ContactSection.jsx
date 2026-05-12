@@ -75,13 +75,13 @@ export default function ContactSection() {
           </div>
           <div className="hidden sm:block w-px h-4 bg-border/60" />
           <a
-            href="https://linkedin.com/in/thalisson"
+            href="https://linkedin.com/in/thalissonpereira01"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-primary transition-colors duration-200"
           >
             <Linkedin size={14} className="text-primary shrink-0" />
-            linkedin.com/in/thalisson
+            linkedin.com/in/thalissonpereira01
           </a>
         </motion.div>
       </div>
