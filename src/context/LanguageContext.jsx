@@ -42,7 +42,7 @@ export const LanguageProvider = ({ children }) => {
       },
       heroText: {
         fullText: "Thalisson Pereira",
-        roles: ["Senior .NET Developer", "Backend Engineer", "Tech Lead", ".NET & React.js"],
+        roles: ["Senior .NET Developer", "Backend Engineer", ".NET & React.js"],
         valueProps: "13+ years building enterprise .NET systems · Canada & Brazil",
         cta: { work: "View My Work", resume: "Resume" },
       },
@@ -210,7 +210,7 @@ export const LanguageProvider = ({ children }) => {
       },
       heroText: {
         fullText: "Thalisson Pereira",
-        roles: ["Desenvolvedor Sênior .NET", "Engenheiro Backend", "Tech Lead", ".NET & React.js"],
+        roles: ["Desenvolvedor Sênior .NET", "Engenheiro Backend", ".NET & React.js"],
         valueProps: "13+ anos desenvolvendo sistemas .NET enterprise · Canadá & Brasil",
         cta: { work: "Ver Meu Trabalho", resume: "Currículo" },
       },
