@@ -1,4 +1,4 @@
-import { Github, Twitter, Linkedin, Code } from "lucide-react";
+import { Github, Linkedin, Code } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
@@ -24,13 +24,16 @@ const SocialSidebar = () => {
           <a href="https://github.com/Thaalisson" target="_blank" rel="noreferrer" aria-label="GitHub">
             <Github className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter">
-            <Twitter className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
-          </a>
           <a href="https://linkedin.com/in/thalissonpereira01" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
           </a>
-          <a href="#" target="_blank" rel="noreferrer" aria-label="Portfolio Code">
+          <a
+            href="https://github.com/Thaalisson/portifolio-thalisson"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Portfolio Source Code"
+            title="View this portfolio's source code"
+          >
             <Code className="hover:-translate-y-1 hover:text-primary transition-all duration-300" size={18} />
           </a>
         </motion.div>

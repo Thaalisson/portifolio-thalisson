@@ -9,15 +9,31 @@ const bootLines = [
   "> Thalisson Portfolio",
 ];
 
+const STORAGE_KEY = "tp-intro-seen";
+
 export default function WelcomeBoot({ onComplete }) {
-  const [started, setStarted] = useState(false);
   const [currentLine, setCurrentLine] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [lines, setLines] = useState([]);
-  const [typing, setTyping] = useState(false);
+  const [typing, setTyping] = useState(true);
   const audioRef = useRef(null);
+  const finishedRef = useRef(false);
 
-  const startSequence = () => {
+  const finish = () => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    try {
+      localStorage.setItem(STORAGE_KEY, "true");
+    } catch {
+      // localStorage unavailable — safe to ignore, intro just replays next visit
+    }
+    onComplete();
+  };
+
+  // Best-effort audio — browsers block autoplay-with-sound without a user
+  // gesture, so this silently no-ops on first visit and the animation
+  // still plays without sound.
+  useEffect(() => {
     const audio = new Audio("/songs/typing.mp3");
     audio
       .play()
@@ -25,15 +41,11 @@ export default function WelcomeBoot({ onComplete }) {
         audio.pause();
         audio.currentTime = 0;
         audioRef.current = audio;
-        setStarted(true);
-        setTyping(true);
       })
       .catch(() => {
         audioRef.current = audio;
-        setStarted(true);
-        setTyping(true);
       });
-  };
+  }, []);
 
   useEffect(() => {
     if (!typing || currentLine >= bootLines.length) return;
@@ -57,60 +69,49 @@ export default function WelcomeBoot({ onComplete }) {
           setLines((prev) => [...prev, fullLine]);
           setCurrentText("");
           setCurrentLine((prev) => prev + 1);
-        }, 400);
+        }, 180);
       }
-    }, 45);
+    }, 18);
 
     return () => clearInterval(interval);
   }, [currentLine, typing]);
 
   useEffect(() => {
-    if (started && currentLine >= bootLines.length) {
+    if (currentLine >= bootLines.length) {
       setTyping(false);
-      const timeout = setTimeout(onComplete, 1000);
+      const timeout = setTimeout(finish, 400);
       return () => clearTimeout(timeout);
     }
-  }, [currentLine, onComplete, started]);
+  }, [currentLine]);
 
   return (
     <motion.div
       key="boot"
-      className="min-h-screen flex items-center justify-center bg-black text-primary font-mono px-4"
+      className="min-h-screen flex flex-col items-center justify-center gap-6 bg-black text-primary font-mono px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {!started ? (
-        <div className="flex flex-col items-center gap-4">
-          <button
-            onClick={startSequence}
-            className="px-6 py-3 text-xs font-semibold tracking-[0.2em] uppercase border border-primary rounded shadow-lg hover:bg-primary hover:text-black transition"
-          >
-            Start Boot Sequence
-          </button>
-          <button
-            onClick={onComplete}
-            className="text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition"
-          >
-            Skip Intro
-          </button>
-        </div>
-      ) : (
-        <div className="w-full max-w-md bg-black/70 p-6 rounded-md border border-primary shadow-[0_0_20px_hsl(var(--primary))] text-sm">
-          {lines.map((line, i) => (
-            <p key={i} className="leading-5 whitespace-pre-wrap">
-              {line}
-            </p>
-          ))}
-          {typing && (
-            <p className="leading-5 whitespace-pre-wrap">
-              {currentText}
-              <span className="animate-pulse">|</span>
-            </p>
-          )}
-        </div>
-      )}
+      <div className="w-full max-w-md bg-black/70 p-6 rounded-md border border-primary shadow-[0_0_20px_hsl(var(--primary))] text-sm">
+        {lines.map((line, i) => (
+          <p key={i} className="leading-5 whitespace-pre-wrap">
+            {line}
+          </p>
+        ))}
+        {typing && (
+          <p className="leading-5 whitespace-pre-wrap">
+            {currentText}
+            <span className="animate-pulse">|</span>
+          </p>
+        )}
+      </div>
+      <button
+        onClick={finish}
+        className="text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition"
+      >
+        Skip Intro
+      </button>
     </motion.div>
   );
 }

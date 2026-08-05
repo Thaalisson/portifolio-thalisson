@@ -13,8 +13,16 @@ import ContactSection from "./components/ContactSection";
 import BlogSection from "./components/BlogSection";
 
 
+const hasSeenIntro = () => {
+  try {
+    return localStorage.getItem("tp-intro-seen") === "true";
+  } catch {
+    return false;
+  }
+};
+
 export default function App() {
-  const [booted, setBooted] = useState(false);
+  const [booted, setBooted] = useState(hasSeenIntro);
 
   return (
     <LanguageProvider>
