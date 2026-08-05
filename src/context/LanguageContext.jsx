@@ -42,35 +42,35 @@ export const LanguageProvider = ({ children }) => {
       },
       heroText: {
         fullText: "Thalisson Pereira",
-        roles: ["Senior .NET Developer", "Backend Engineer", ".NET & React.js"],
-        valueProps: "13+ years building enterprise .NET systems · Canada & Brazil",
+        roles: ["Senior Software Developer", ".NET & React Engineer", "AI-Assisted Engineering"],
+        valueProps: "13+ years building enterprise .NET & React systems · AI-assisted engineering with Claude Code",
         cta: { work: "View My Work", resume: "Resume" },
       },
       about: {
         title: "Full Stack Developer",
         heading: "Crafting digital experiences with code",
         highlights: [
-          "10+ years",
-          "CRM",
-          "Billing & Recovery",
+          "13+ years",
+          "Clean Architecture",
+          "AI-Assisted Engineering",
           ".NET",
           "C#",
           "React",
-          "Leadership",
-          "Cost Reduction",
+          "PostgreSQL",
+          "CI/CD",
         ],
         paragraph1:
-          "Software Developer with over 12 years of experience designing, building, and optimizing enterprise-grade CRM, billing, and credit recovery systems across telecom, finance, logistics, and cosmetics industries. Proven expertise in delivering scalable, high-performance solutions that drive measurable business results.",
+          "Senior Software Developer with 13+ years of experience delivering enterprise applications and SaaS products using C#, .NET, React, TypeScript, REST APIs, SQL Server, and PostgreSQL, including modernization of legacy VB6 and Classic ASP systems.",
         paragraph2:
-          "Strong background in full-stack development, with deep knowledge of C#, .NET, SQL Server, ASP.NET, JavaScript, React.js, and modern frontend architectures. Demonstrated success in system optimization, achieving up to 40% reduction in operational costs and 30% acceleration in delivery pipelines through clean architecture, modular design, and performance-driven engineering practices.",
+          "Builds maintainable software with Clean Architecture, domain-oriented design, automated testing, and CI/CD. Enthusiastic about AI-assisted engineering, using Claude Code and ChatGPT for code review, API contract validation, test design, migration work, and Markdown documentation.",
         paragraph3:
-          "Led a 4-person production support team — defined SLAs, classified incident criticality, assigned tasks by developer expertise, and ran direct client meetings during critical outages. Eliminated over 60% of recurring production issues through root-cause analysis and systematic fixes.\n\nCurrently based in Canada, highly adaptable, and motivated by continuous learning. Actively seeking senior or tech lead roles where I can combine deep .NET expertise with hands-on team leadership.",
+          "Personally reviews AI-generated code and continuously improves prompting and validation techniques to obtain more accurate, reliable results.\n\nCurrently based in London, Ontario, Canada, highly adaptable, and motivated by continuous learning.",
       },
       developer: {
         name: "Thalisson Pereira",
         role: {
-          en: "Full Stack Developer",
-          pt: "Desenvolvedor Full Stack",
+          en: "Senior Software Developer",
+          pt: "Desenvolvedor de Software Sênior",
         },
         loves: {
           en: ["Clean Code", "Problem Solving", "Learning"],
@@ -210,35 +210,35 @@ export const LanguageProvider = ({ children }) => {
       },
       heroText: {
         fullText: "Thalisson Pereira",
-        roles: ["Desenvolvedor Sênior .NET", "Engenheiro Backend", ".NET & React.js"],
-        valueProps: "13+ anos desenvolvendo sistemas .NET enterprise · Canadá & Brasil",
+        roles: ["Desenvolvedor de Software Sênior", "Engenheiro .NET & React", "Engenharia Assistida por IA"],
+        valueProps: "13+ anos construindo sistemas .NET & React enterprise · engenharia assistida por IA com Claude Code",
         cta: { work: "Ver Meu Trabalho", resume: "Currículo" },
       },
       about: {
         title: "Full Stack Developer",
         heading: "Crafting digital experiences with code",
         highlights: [
-          "10+ anos",
-          "CRM",
-          "Cobranca e Recuperacao",
+          "13+ anos",
+          "Clean Architecture",
+          "Engenharia Assistida por IA",
           ".NET",
           "C#",
           "React",
-          "Lideranca",
-          "Reducao de custos",
+          "PostgreSQL",
+          "CI/CD",
         ],
         paragraph1:
-          "Software Developer apaixonado por tecnologia, com mais de 10 anos de experiencia criando e implementando solucoes robustas para CRM, especialmente nos setores de telecomunicacoes, financeiro e cosmeticos. Especialista em sistemas de cobranca e recuperacao de credito, com historico comprovado de resultados expressivos.",
+          "Desenvolvedor de Software Sênior com mais de 13 anos de experiência entregando aplicações enterprise e produtos SaaS usando C#, .NET, React, TypeScript, REST APIs, SQL Server e PostgreSQL, incluindo modernização de sistemas legados em VB6 e Classic ASP.",
         paragraph2:
-          "Domina linguagens como Visual Basic 6, C#, SQL Server, ASP, JavaScript e React.js. Atuou liderando equipes tecnicas, otimizando sistemas em ate 40% e reduzindo custos operacionais em 20%. Tambem gerenciou times de suporte, eliminando problemas recorrentes em mais de 60% dos casos.",
+          "Constrói software sustentável com Clean Architecture, design orientado a domínio, testes automatizados e CI/CD. Entusiasta de engenharia assistida por IA, usando Claude Code e ChatGPT para revisão de código, validação de contratos de API, design de testes, trabalhos de migração e documentação em Markdown.",
         paragraph3:
-          "Liderou equipe de 4 pessoas de suporte a producao — definiu SLAs, classificou criticidade de incidentes, delegou tarefas por expertise e conduziu reunioes diretas com clientes durante indisponibilidades criticas. Eliminou mais de 60% dos problemas recorrentes em producao atraves de analise de causa raiz.\n\nAtualmente no Canada, em busca de vagas senior ou tech lead onde possa combinar profundo conhecimento em .NET com lideranca tecnica de equipes.",
+          "Revisa pessoalmente código gerado por IA e aprimora continuamente técnicas de prompting e validação para obter resultados mais precisos e confiáveis.\n\nAtualmente baseado em London, Ontario, Canadá, altamente adaptável e motivado por aprendizado contínuo.",
       },
       developer: {
         name: "Thalisson Pereira",
         role: {
-          en: "Full Stack Developer",
-          pt: "Desenvolvedor Full Stack",
+          en: "Senior Software Developer",
+          pt: "Desenvolvedor de Software Sênior",
         },
         loves: {
           en: ["Clean Code", "Problem Solving", "Learning"],

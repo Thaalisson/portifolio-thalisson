@@ -18,10 +18,10 @@ const projects = [
     icon: FaCubes,
     metric: "↓ 50% layout time · ↓ 35% rework",
     description: {
-      en: "Visual page builder via JSON configurations using React.js, React Native (Expo), TypeScript, and Tailwind CSS. Real-time preview and versioned layouts for non-technical users.",
-      pt: "Builder visual de páginas via configurações JSON com React.js, React Native (Expo), TypeScript e Tailwind CSS. Preview em tempo real e layouts versionados para usuários não técnicos.",
+      en: "JSON-driven visual page builder using C#, ASP.NET Core, React, React Native/Expo, TypeScript, and reusable UI components. Clean Architecture and domain modules on the backend, Claude-assisted Markdown documentation, and automated tests with complete simulated database scenarios.",
+      pt: "Builder visual de páginas orientado a JSON com C#, ASP.NET Core, React, React Native/Expo, TypeScript e componentes de UI reutilizáveis. Clean Architecture e módulos de domínio no backend, documentação em Markdown assistida por Claude, e testes automatizados com cenários completos de banco de dados simulados.",
     },
-    tech: ["React.js", "React Native", "TypeScript", "Tailwind CSS"],
+    tech: ["React.js", "React Native", "TypeScript", ".NET Core", "Clean Arch"],
     type: "enterprise",
   },
   {
@@ -52,16 +52,16 @@ const projects = [
   },
   {
     id: "shiva",
-    title: "S.H.I.V.A",
-    company: "Freelance · BrayLab",
+    title: "SHIVA Mental Health",
+    company: "DriveData (Freelance)",
     icon: FaHeartbeat,
-    metric: { en: "Active B2B SaaS · NR-1 / NR-17", pt: "SaaS B2B ativo · NR-1 / NR-17" },
+    metric: { en: "Multi-tenant white-label SaaS · NR-01", pt: "SaaS multi-tenant white-label · NR-01" },
     description: {
-      en: "SaaS platform for occupational health & compliance. Features 3D office visualization (Three.js), Neuromap, PDF report generation, multi-tenant auth, and AI-driven training plans.",
-      pt: "Plataforma SaaS para saúde ocupacional e conformidade. Visualização 3D do escritório (Three.js), Neuromap, geração de PDF, auth multi-tenant e planos de capacitação com IA.",
+      en: "Multi-tenant, white-label SaaS platform for workplace psychosocial risk management aligned with Brazil's NR-01 regulation. Executive risk dashboards, assessment campaigns, training paths, and an employee portal, with i18n in Portuguese, English, and Italian. Structured the React/TypeScript frontend using Vertical Slice Architecture and contributed to the n8n-to-.NET API migration, standardized API contracts, JWT identity flows, CI/CD, and LLM-generated assessment insights.",
+      pt: "Plataforma SaaS multi-tenant e white-label para gestão de riscos psicossociais no trabalho, alinhada à NR-01. Dashboards executivos de risco, campanhas de avaliação, trilhas de treinamento e portal do colaborador, com internacionalização em Português, Inglês e Italiano. Estruturou o frontend React/TypeScript com Vertical Slice Architecture e contribuiu para a migração incremental de API n8n para .NET, contratos de API padronizados, fluxos de identidade JWT, CI/CD e insights de avaliação gerados por LLM.",
     },
-    tech: ["React 19", "TypeScript", "Three.js", "Tailwind CSS 4", "Recharts"],
-    link: "https://app-shiva.braylab.com.br",
+    tech: ["React", "TypeScript", ".NET", "n8n", "JWT", "CI/CD"],
+    link: "https://shivaapp.com.br",
     type: "live",
   },
   {

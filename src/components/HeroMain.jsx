@@ -195,16 +195,16 @@ export default function HeroMain() {
           </div>
           <div className="w-px h-7 bg-foreground/15" />
           <div>
-            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>40%</div>
+            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>50%</div>
             <div className="text-[11px] text-foreground/40 tracking-wide mt-0.5">
-              {language === "en" ? "Cost reduction" : "Redução de custo"}
+              {language === "en" ? "Faster UI delivery" : "UI mais rápida"}
             </div>
           </div>
           <div className="w-px h-7 bg-foreground/15" />
           <div>
-            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>4</div>
+            <div className="text-xl font-bold" style={{ color: "hsl(var(--foreground))" }}>35%</div>
             <div className="text-[11px] text-foreground/40 tracking-wide mt-0.5">
-              {language === "en" ? "Devs led" : "Devs liderados"}
+              {language === "en" ? "Less rework" : "Menos retrabalho"}
             </div>
           </div>
         </motion.div>

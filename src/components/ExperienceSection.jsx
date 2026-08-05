@@ -12,6 +12,7 @@ import {
   UserCheck,
   Cloud,
   FlaskConical,
+  Sparkles,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
@@ -94,6 +95,12 @@ const skills = [
     title: "Soft Skills",
     description:
       "Tech Leadership, Mentorship, Systemic Thinking, Autonomy, Problem Solving, Product Vision",
+  },
+  {
+    icon: Sparkles,
+    title: "AI-Assisted Engineering",
+    description:
+      "Claude Code & ChatGPT for diff review, refactoring, debugging, API verification, test and edge-case generation, Markdown documentation, and prompt refinement",
   },
 ];
 
