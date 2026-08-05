@@ -5,6 +5,11 @@ import { MapPin, ArrowRight, Download } from "lucide-react";
 import bgImage from "../assets/IMG_2459.jpg";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
+import ParticleNetwork from "./ParticleNetwork";
+
+const LETTER_STAGGER = 0.035;
+const LETTER_DURATION = 0.5;
+const LETTER_EASE = [0.16, 1, 0.3, 1];
 
 export default function HeroMain() {
   const { theme } = useTheme();
@@ -14,40 +19,18 @@ export default function HeroMain() {
   const valueProps = t("heroText.valueProps");
   const cta = t("heroText.cta");
 
-  const [charIndex, setCharIndex] = useState(0);
   const [roleIndex, setRoleIndex] = useState(0);
   const [subtext, setSubtext] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [bootText, setBootText] = useState("");
-
-  // Terminal-style flavor line — purely decorative, runs alongside the rest
-  // of the Hero instead of gating it behind a separate boot screen.
-  useEffect(() => {
-    const line = "> whoami";
-    let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setBootText(line.slice(0, i));
-      if (i >= line.length) clearInterval(interval);
-    }, 45);
-    return () => clearInterval(interval);
-  }, []);
+  const [nameComplete, setNameComplete] = useState(false);
 
   // Reset animation on language change
   useEffect(() => {
-    setCharIndex(0);
     setSubtext("");
     setRoleIndex(0);
     setIsDeleting(false);
+    setNameComplete(false);
   }, [language]);
-
-  // Type the name
-  useEffect(() => {
-    if (charIndex < fullText.length) {
-      const t = setTimeout(() => setCharIndex((i) => i + 1), 100);
-      return () => clearTimeout(t);
-    }
-  }, [charIndex, fullText]);
 
   // Cycle roles
   useEffect(() => {
@@ -69,9 +52,9 @@ export default function HeroMain() {
     return () => clearTimeout(timeout);
   }, [subtext, isDeleting, roleIndex, roles]);
 
-  const nameComplete = charIndex >= fullText.length;
-
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const nameLetters = fullText.split("");
 
   return (
     <motion.section
@@ -99,19 +82,11 @@ export default function HeroMain() {
         }}
       />
 
+      {/* Ambient neural network — permanent, subtle, reacts to the pointer */}
+      <ParticleNetwork />
+
       {/* Content */}
       <div className="relative z-10 max-w-xl">
-
-        {/* Terminal flavor line */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="font-mono text-[11px] text-primary/60 mb-3 tracking-wide"
-        >
-          {bootText}
-          <span className="ml-0.5 animate-pulse">_</span>
-        </motion.div>
 
         {/* Location */}
         <motion.div
@@ -124,18 +99,30 @@ export default function HeroMain() {
           <span>London, ON, Canada</span>
         </motion.div>
 
-        {/* Name — inline style wins over any CSS layer conflict */}
+        {/* Name — mask + blur reveal, letter by letter */}
         <h1
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-3"
           style={{ color: "hsl(var(--foreground))" }}
         >
-          {fullText.slice(0, charIndex)}
-          {!nameComplete && (
-            <span
-              className="ml-0.5 inline-block w-[3px] rounded-sm animate-pulse align-middle"
-              style={{ height: "0.82em", backgroundColor: "hsl(var(--primary))" }}
-            />
-          )}
+          {nameLetters.map((char, i) => {
+            const isLast = i === nameLetters.length - 1;
+            return (
+              <motion.span
+                key={`${language}-${i}`}
+                initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, filter: "blur(6px)" }}
+                animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1, filter: "blur(0px)" }}
+                transition={{
+                  duration: LETTER_DURATION,
+                  delay: i * LETTER_STAGGER,
+                  ease: LETTER_EASE,
+                }}
+                onAnimationComplete={isLast ? () => setNameComplete(true) : undefined}
+                style={{ display: "inline-block" }}
+              >
+                {char === " " ? " " : char}
+              </motion.span>
+            );
+          })}
         </h1>
 
         {/* Role — inline style for same reason */}

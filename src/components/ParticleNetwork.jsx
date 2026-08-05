@@ -1,22 +1,26 @@
 import { useEffect, useRef } from "react";
 
-const CLUSTER_DENSITY = 3200; // 1 node per this many px² of the cluster ellipse
-const MAX_NODES = 130;
+const CLUSTER_DENSITY = 5200; // 1 node per this many px² of the cluster ellipse
+const MAX_NODES = 70;
 const LINK_DISTANCE_RATIO = 0.34; // relative to the cluster's horizontal radius
-const DRIFT_SPEED = 0.1;
-const PULSE_SPAWN_MS = 220;
-const PULSE_DURATION_MS = 900;
+const DRIFT_SPEED = 0.05;
+const PULSE_SPAWN_MS = 3000;
+const PULSE_DURATION_MS = 1400;
+const PARALLAX_MAX_PX = 22;
+const PARALLAX_EASE = 0.06;
 const FALLBACK_PRIMARY = "144 68% 45%"; // matches --primary in index.css
 
-// Lightweight canvas "neural network" background — nodes clustered into a
-// brain-shaped ellipse, densely interlinked, with signal pulses traveling
-// along edges. No Three.js, no extra dependency; runs only for the ~2.6s
-// the intro splash is on screen.
-export default function ParticleNetwork() {
+// Ambient canvas "neural network" — a permanent, subtle Hero backdrop rather
+// than a one-shot intro. Nodes cluster into a brain-shaped ellipse anchored
+// toward the text column, drift gently, link densely, and occasionally fire
+// a soft signal pulse. Reacts to the pointer with a light parallax drift.
+// No Three.js, no extra dependency — plain canvas 2D sized to its container.
+export default function ParticleNetwork({ anchorXRatio = 0.34, anchorYRatio = 0.46 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const container = canvas.parentElement;
     const ctx = canvas.getContext("2d");
     if (!ctx) return; // canvas unsupported (e.g. jsdom in tests)
 
@@ -42,21 +46,26 @@ export default function ParticleNetwork() {
     let rx = 0;
     let ry = 0;
     let linkDistance = 0;
+    let parallaxTargetX = 0;
+    let parallaxTargetY = 0;
+    let parallaxX = 0;
+    let parallaxY = 0;
 
     const resize = () => {
+      const rect = container.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = rect.width;
+      height = rect.height;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      cx = width / 2;
-      cy = height / 2;
-      rx = Math.min(width, height) * 0.44;
-      ry = rx * 0.78;
+      cx = width * anchorXRatio;
+      cy = height * anchorYRatio;
+      rx = Math.min(width * 0.7, height) * 0.46;
+      ry = rx * 0.8;
       linkDistance = rx * LINK_DISTANCE_RATIO;
     };
 
@@ -103,39 +112,40 @@ export default function ParticleNetwork() {
       pulses.push({ a, b, t: 0, reverse: Math.random() < 0.5 });
     };
 
-    const step = (dt, animate) => {
-      if (animate) {
-        nodes.forEach((n) => {
-          n.x += n.vx * dt;
-          n.y += n.vy * dt;
-          const dx = n.x - cx;
-          const dy = n.y - cy;
-          if ((dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) > 1) {
-            n.vx *= -1;
-            n.vy *= -1;
-          }
-        });
-        rebuildEdges();
-
-        sinceLastPulse += dt;
-        if (sinceLastPulse > PULSE_SPAWN_MS) {
-          sinceLastPulse = 0;
-          spawnPulse();
+    const step = (dt) => {
+      nodes.forEach((n) => {
+        n.x += n.vx * dt;
+        n.y += n.vy * dt;
+        const dx = n.x - cx;
+        const dy = n.y - cy;
+        if ((dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) > 1) {
+          n.vx *= -1;
+          n.vy *= -1;
         }
-        pulses.forEach((p) => (p.t += dt));
-        pulses = pulses.filter((p) => p.t < PULSE_DURATION_MS);
-      } else if (!edges.length) {
-        rebuildEdges();
+      });
+      rebuildEdges();
+
+      sinceLastPulse += dt;
+      if (sinceLastPulse > PULSE_SPAWN_MS) {
+        sinceLastPulse = 0;
+        spawnPulse();
       }
+      pulses.forEach((p) => (p.t += dt));
+      pulses = pulses.filter((p) => p.t < PULSE_DURATION_MS);
+
+      parallaxX += (parallaxTargetX - parallaxX) * PARALLAX_EASE;
+      parallaxY += (parallaxTargetY - parallaxY) * PARALLAX_EASE;
     };
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.translate(parallaxX, parallaxY);
 
       edges.forEach(([i, j, dist]) => {
         const a = nodes[i];
         const b = nodes[j];
-        const alpha = 0.22 * (1 - dist / linkDistance);
+        const alpha = 0.12 * (1 - dist / linkDistance);
         ctx.strokeStyle = `hsl(${primary} / ${alpha})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -154,25 +164,27 @@ export default function ParticleNetwork() {
           : 1 - Math.pow(-2 * progress + 2, 2) / 2;
         const x = from.x + (to.x - from.x) * eased;
         const y = from.y + (to.y - from.y) * eased;
-        const fade = Math.sin(progress * Math.PI); // fade in, peak mid, fade out
+        const fade = Math.sin(progress * Math.PI);
         ctx.beginPath();
-        ctx.fillStyle = `hsl(${primary} / ${0.9 * fade})`;
-        ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${primary} / ${0.7 * fade})`;
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      ctx.fillStyle = `hsl(${primary} / 0.6)`;
+      ctx.fillStyle = `hsl(${primary} / 0.4)`;
       nodes.forEach((n) => {
         ctx.beginPath();
-        ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, 1.4, 0, Math.PI * 2);
         ctx.fill();
       });
+
+      ctx.restore();
     };
 
     const loop = (time) => {
       const dt = lastTime ? time - lastTime : 16;
       lastTime = time;
-      step(dt, true);
+      step(dt);
       draw();
       rafId = requestAnimationFrame(loop);
     };
@@ -194,11 +206,23 @@ export default function ParticleNetwork() {
     };
     window.addEventListener("resize", handleResize);
 
+    const handlePointerMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      parallaxTargetX = nx * PARALLAX_MAX_PX * -1;
+      parallaxTargetY = ny * PARALLAX_MAX_PX * -1;
+    };
+    if (!reduceMotion) {
+      window.addEventListener("pointermove", handlePointerMove);
+    }
+
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointermove", handlePointerMove);
     };
-  }, []);
+  }, [anchorXRatio, anchorYRatio]);
 
   return (
     <canvas
