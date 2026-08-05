@@ -18,6 +18,20 @@ export default function HeroMain() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [subtext, setSubtext] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [bootText, setBootText] = useState("");
+
+  // Terminal-style flavor line — purely decorative, runs alongside the rest
+  // of the Hero instead of gating it behind a separate boot screen.
+  useEffect(() => {
+    const line = "> whoami";
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      setBootText(line.slice(0, i));
+      if (i >= line.length) clearInterval(interval);
+    }, 45);
+    return () => clearInterval(interval);
+  }, []);
 
   // Reset animation on language change
   useEffect(() => {
@@ -87,6 +101,17 @@ export default function HeroMain() {
 
       {/* Content */}
       <div className="relative z-10 max-w-xl">
+
+        {/* Terminal flavor line */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="font-mono text-[11px] text-primary/60 mb-3 tracking-wide"
+        >
+          {bootText}
+          <span className="ml-0.5 animate-pulse">_</span>
+        </motion.div>
 
         {/* Location */}
         <motion.div
