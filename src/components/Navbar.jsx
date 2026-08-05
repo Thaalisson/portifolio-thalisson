@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun, Globe, Download } from "lucide-react";
+import { Menu, X, Moon, Sun, Globe, Download, Github, Linkedin, Code } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
@@ -189,6 +189,24 @@ const Navbar = () => {
                 >
                   <Download size={14} />
                   {language === "en" ? "Download Resume" : "Baixar Currículo"}
+                </a>
+              </div>
+
+              {/* SocialSidebar is hidden below md — surface the same links here */}
+              <div className="flex items-center justify-center gap-6 pt-4 text-foreground/60">
+                <a href="https://github.com/Thaalisson" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <Github size={18} className="hover:text-primary transition-colors duration-200" />
+                </a>
+                <a href="https://linkedin.com/in/thalissonpereira01" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <Linkedin size={18} className="hover:text-primary transition-colors duration-200" />
+                </a>
+                <a
+                  href="https://github.com/Thaalisson/portifolio-thalisson"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Portfolio Source Code"
+                >
+                  <Code size={18} className="hover:text-primary transition-colors duration-200" />
                 </a>
               </div>
             </div>

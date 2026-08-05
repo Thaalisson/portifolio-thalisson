@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
 import { MapPin, ArrowRight, Download } from "lucide-react";
@@ -54,7 +54,9 @@ export default function HeroMain() {
 
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
-  const nameLetters = fullText.split("");
+  // Words are wrapped as atomic inline-blocks so a line can only ever break
+  // between words — the letters inside still animate individually.
+  const words = fullText.split(" ");
 
   return (
     <motion.section
@@ -99,30 +101,46 @@ export default function HeroMain() {
           <span>London, ON, Canada</span>
         </motion.div>
 
-        {/* Name — mask + blur reveal, letter by letter */}
+        {/* Name — mask + blur reveal, letter by letter, grouped by word so
+            lines only ever break between words, never mid-word */}
         <h1
           className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-3"
           style={{ color: "hsl(var(--foreground))" }}
         >
-          {nameLetters.map((char, i) => {
-            const isLast = i === nameLetters.length - 1;
-            return (
-              <motion.span
-                key={`${language}-${i}`}
-                initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, filter: "blur(6px)" }}
-                animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1, filter: "blur(0px)" }}
-                transition={{
-                  duration: LETTER_DURATION,
-                  delay: i * LETTER_STAGGER,
-                  ease: LETTER_EASE,
-                }}
-                onAnimationComplete={isLast ? () => setNameComplete(true) : undefined}
-                style={{ display: "inline-block" }}
-              >
-                {char === " " ? " " : char}
-              </motion.span>
-            );
-          })}
+          {(() => {
+            let globalIndex = 0;
+            return words.map((word, wordIndex) => {
+              const isLastWord = wordIndex === words.length - 1;
+              const wordStart = globalIndex;
+              globalIndex += word.length + 1; // +1 for the space after this word
+              return (
+                <Fragment key={`${language}-w-${wordIndex}`}>
+                  <span style={{ display: "inline-block" }}>
+                    {word.split("").map((char, charIndex) => {
+                      const isLastLetter = isLastWord && charIndex === word.length - 1;
+                      return (
+                        <motion.span
+                          key={`${language}-${wordStart + charIndex}`}
+                          initial={{ clipPath: "inset(0 0 100% 0)", opacity: 0, filter: "blur(6px)" }}
+                          animate={{ clipPath: "inset(0 0 0% 0)", opacity: 1, filter: "blur(0px)" }}
+                          transition={{
+                            duration: LETTER_DURATION,
+                            delay: (wordStart + charIndex) * LETTER_STAGGER,
+                            ease: LETTER_EASE,
+                          }}
+                          onAnimationComplete={isLastLetter ? () => setNameComplete(true) : undefined}
+                          style={{ display: "inline-block" }}
+                        >
+                          {char}
+                        </motion.span>
+                      );
+                    })}
+                  </span>
+                  {!isLastWord && " "}
+                </Fragment>
+              );
+            });
+          })()}
         </h1>
 
         {/* Role — inline style for same reason */}
